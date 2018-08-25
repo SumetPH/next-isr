@@ -27,8 +27,10 @@ router.post('/api/image/upload', (req, res) => {
    const index = img.base64.indexOf(',') + 1
    const base64 = img.base64.substr(index)
    imgur.uploadBase64(base64).then(json => {
+      console.log(json.data)
       const newImage = new Image({
          filename: img.name,
+         deletehash: json.data.deletehash,
          path: json.data.link
       })
 
@@ -48,11 +50,17 @@ router.delete('/api/image/delete/:id', (req, res) => {
       if (err) {
          return res.json({ msg: 'Not found image.' })
       }
-      image.remove(err => {
-         if (err) {
-            return res.json({ msg: 'Can not delete image.' })
+      imgur.deleteImage(image.deletehash).then(status => {
+         console.log(status)
+         if (!status.success) {
+            return res.json({ msg: 'Error' })
          }
-         res.json({ msg: 'Deleted' })
+         image.remove(err => {
+            if (err) {
+               return res.json({ msg: 'Error' })
+            }
+            res.json({ msg: 'Deleted' })
+         })
       })
    })
 })
