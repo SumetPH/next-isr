@@ -63,16 +63,18 @@ class Index extends Component {
                                  <a className="navbar-item">กระทู้ถามตอบ</a>
                               </Link>
                               <span className="navbar-item">
-                                 <Link href="/login">
-                                    <a className="button is-primary is-rounded">
-                                       <span className="icon">
-                                          <i className="fas fa-key" />
-                                       </span>
-                                       <span>
-                                          <b>Admin</b>
-                                       </span>
-                                    </a>
-                                 </Link>
+                                 {/* <Link href="/login"> */}
+                                 <a
+                                    href="/login"
+                                    className="button is-primary is-rounded">
+                                    <span className="icon">
+                                       <i className="fas fa-key" />
+                                    </span>
+                                    <span>
+                                       <b>Admin</b>
+                                    </span>
+                                 </a>
+                                 {/* </Link> */}
                               </span>
                            </div>
                         </div>
