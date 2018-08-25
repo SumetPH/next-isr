@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import classnames from 'classnames'
 
+// redux
+import { connect } from 'react-redux'
+import { logout } from '../redux/store'
+
 class Index extends Component {
    state = {
       isActive: false,
@@ -16,6 +20,10 @@ class Index extends Component {
 
    componentWillUnmount = () => {
       clearInterval(this.interval)
+   }
+
+   logout = () => {
+      this.props.dispatch(logout())
    }
 
    render() {
@@ -63,16 +71,29 @@ class Index extends Component {
                                  <a className="navbar-item">กระทู้ถามตอบ</a>
                               </Link>
                               <span className="navbar-item">
-                                 <Link href="/login">
-                                    <a className="button is-primary is-rounded">
+                                 {this.props.isAuth ? (
+                                    <button
+                                       className="button is-warning is-rounded"
+                                       onClick={this.logout}>
                                        <span className="icon">
                                           <i className="fas fa-key" />
                                        </span>
                                        <span>
-                                          <b>Admin</b>
+                                          <b>Logout</b>
                                        </span>
-                                    </a>
-                                 </Link>
+                                    </button>
+                                 ) : (
+                                    <Link href="/login">
+                                       <a className="button is-primary is-rounded">
+                                          <span className="icon">
+                                             <i className="fas fa-key" />
+                                          </span>
+                                          <span>
+                                             <b>Admin</b>
+                                          </span>
+                                       </a>
+                                    </Link>
+                                 )}
                               </span>
                            </div>
                         </div>
@@ -108,4 +129,4 @@ class Index extends Component {
       )
    }
 }
-export default Index
+export default connect(state => state)(Index)
