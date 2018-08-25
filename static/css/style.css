@@ -1,0 +1,13 @@
+.bg {
+   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('/static/images/bg.jpeg');
+   background-size: cover;
+}
+
+.m-1 {
+   margin: 1rem;
+}
+
+.mt-1 {
+   margin-top: 1rem;
+}
