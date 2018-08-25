@@ -20,7 +20,11 @@ class AdminQuestions extends Component {
 
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
-         this.setState({ questions: res.data.res, loadPage: true })
+         this.setState({ questions: res.data.res })
+
+         setTimeout(() => {
+            this.setState({ loadPage: true })
+         }, 1000)
       })
    }
 

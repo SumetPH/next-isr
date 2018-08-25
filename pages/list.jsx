@@ -24,8 +24,8 @@ class List extends Component {
    }
 
    logout = () => {
-      this.props.dispatch(logout())
       Router.push('/')
+      this.props.dispatch(logout())
    }
 
    // render

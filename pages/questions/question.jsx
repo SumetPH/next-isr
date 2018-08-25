@@ -31,7 +31,11 @@ class Question extends Component {
          if (res.data.msg === 'Error' || res.data.res === null) {
             return Router.push('/questions')
          }
-         this.setState({ question: res.data.res, loadPage: true })
+         this.setState({ question: res.data.res })
+
+         setTimeout(() => {
+            this.setState({ loadPage: true })
+         }, 1000)
       })
    }
 

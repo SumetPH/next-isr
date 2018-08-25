@@ -24,9 +24,12 @@ class AdminImages extends Component {
    loadImages = () => {
       axios.get('/api/image/all').then(res => {
          this.setState({
-            images: res.data.res,
-            loadPage: true
+            images: res.data.res
          })
+
+         setTimeout(() => {
+            this.setState({ loadPage: true })
+         }, 1000)
       })
    }
 
