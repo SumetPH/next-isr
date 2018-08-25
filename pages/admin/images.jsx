@@ -3,8 +3,12 @@ import axios from 'axios'
 import Zoom from 'react-reveal/Zoom'
 import File64 from 'react-file-base64'
 
+// redux
+import { connect } from 'react-redux'
+
 // components
 import Loading from '../../components/loading/Loading'
+import NoAccess from '../../components/noaccess/NoAccess'
 
 class AdminImages extends Component {
    // state
@@ -102,60 +106,60 @@ class AdminImages extends Component {
 
    // render
    render() {
+      if (!this.state.loadPage) {
+         return <Loading />
+      }
+
+      if (!this.props.isAuth) {
+         return <NoAccess />
+      }
+
       return (
          <div className="container">
-            {this.state.loadPage ? (
-               <div>
-                  {/* Upload image */}
-                  <div className="column">
-                     <h3>Upload Image</h3>
-                     <div
-                        className="columns"
-                        style={{ margin: 30, justifyContent: 'center' }}>
-                        <form ref="form">
-                           <File64 onDone={file => this.setState({ file })} />
-                           <button
-                              className={`button is-info is-small ${
-                                 this.state.loadingUpload
-                              }`}
-                              onClick={this.uploadImage}>
-                              Upload
-                           </button>
-                        </form>
-                     </div>
-                     <div className="columns is-multiline">
-                        {/* images list */}
-                        {this.imagesList(this.state.images)}
-                        {/* --- */}
-                     </div>
-                  </div>
-                  {/* --- */}
-
-                  {/* Images Admin. */}
-                  <div className="column">
-                     <h3>Images Admin</h3>
-                     <table className="table is-fullwidth">
-                        <thead>
-                           <tr>
-                              <th>Images</th>
-                              <th>Action</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           {/* images row */}
-                           {this.imagesTable(this.state.images)}
-                           {/* --- */}
-                        </tbody>
-                     </table>
-                  </div>
+            <div className="column">
+               <h3>Upload Image</h3>
+               <div
+                  className="columns"
+                  style={{ margin: 30, justifyContent: 'center' }}>
+                  <form ref="form">
+                     <File64 onDone={file => this.setState({ file })} />
+                     <button
+                        className={`button is-info is-small ${
+                           this.state.loadingUpload
+                        }`}
+                        onClick={this.uploadImage}>
+                        Upload
+                     </button>
+                  </form>
+               </div>
+               <div className="columns is-multiline">
+                  {/* images list */}
+                  {this.imagesList(this.state.images)}
                   {/* --- */}
                </div>
-            ) : (
-               <Loading />
-            )}
+            </div>
+            {/* --- */}
+
+            {/* Images Admin. */}
+            <div className="column">
+               <h3>Images Admin</h3>
+               <table className="table is-fullwidth">
+                  <thead>
+                     <tr>
+                        <th>Images</th>
+                        <th>Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {/* images row */}
+                     {this.imagesTable(this.state.images)}
+                     {/* --- */}
+                  </tbody>
+               </table>
+            </div>
          </div>
       )
    }
 }
 
-export default AdminImages
+export default connect(state => state)(AdminImages)

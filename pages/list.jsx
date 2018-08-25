@@ -25,64 +25,64 @@ class List extends Component {
 
    logout = () => {
       Router.push('/')
-      this.props.dispatch(logout())
+      setTimeout(() => {
+         this.props.dispatch(logout())
+      }, 1000)
    }
 
    // render
    render() {
+      if (!this.state.loadPage) {
+         return <Loading />
+      }
+
+      if (!this.props.isAuth) {
+         return <NoAccess />
+      }
+
       return (
-         <div>
-            {this.state.loadPage ? (
-               this.props.isAuth === true ? (
-                  <div className="hero is-fullheight list">
-                     <div className="hero-head">
-                        <div className="container">
-                           <div className="column">
-                              <div
-                                 className="box "
-                                 style={{
-                                    textAlign: 'center'
-                                 }}>
-                                 <h1>ISR4B Mern Stack.</h1>
-                              </div>
-                           </div>
-                           <div className="column">
-                              <div className="box ">
-                                 <h3>Admin</h3>
-                                 <hr />
-                                 <p className="mb-1">
-                                    <Link href="/admin/questions">
-                                       <a>- Questions Management</a>
-                                    </Link>
-                                 </p>
-                                 {/* <p className="mb-1">
+         <div className="hero is-fullheight list">
+            <div className="hero-head">
+               <div className="container">
+                  <div className="column">
+                     <div
+                        className="box "
+                        style={{
+                           textAlign: 'center'
+                        }}>
+                        <h1>ISR4B Mern Stack.</h1>
+                     </div>
+                  </div>
+                  <div className="column">
+                     <div className="box ">
+                        <h3>Admin</h3>
+                        <hr />
+                        <p className="mb-1">
+                           <Link href="/admin/questions">
+                              <a>- Questions Management</a>
+                           </Link>
+                        </p>
+                        {/* <p className="mb-1">
                                     <Link href="/admin/360">
                                        <a>- Images 360 Management</a>
                                     </Link>
                                  </p> */}
-                                 <p className="mb-1">
-                                    <Link href="/admin/images">
-                                       <a>- Images Management</a>
-                                    </Link>
-                                 </p>
-                              </div>
-                           </div>
-                           <div className="column has-text-centered">
-                              <button
-                                 onClick={this.logout}
-                                 className="button is-warning">
-                                 Logout
-                              </button>
-                           </div>
-                        </div>
+                        <p className="mb-1">
+                           <Link href="/admin/images">
+                              <a>- Images Management</a>
+                           </Link>
+                        </p>
                      </div>
                   </div>
-               ) : (
-                  <NoAccess />
-               )
-            ) : (
-               <Loading />
-            )}
+                  <div className="column has-text-centered">
+                     <button
+                        onClick={this.logout}
+                        className="button is-warning">
+                        Logout
+                     </button>
+                  </div>
+               </div>
+            </div>
          </div>
       )
    }

@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 
+// redux
+import { connect } from 'react-redux'
+
 // components
 import Loading from '../../components/loading/Loading'
+import NoAccess from '../../components/noaccess/NoAccess'
 
 class AdminQuestions extends Component {
    // state
@@ -68,41 +72,43 @@ class AdminQuestions extends Component {
 
    // render
    render() {
+      if (!this.state.loadPage) {
+         return <Loading />
+      }
+
+      if (!this.props.isAuth) {
+         return <NoAccess />
+      }
+
       return (
          <div className="container">
-            {/* Loading Page */}
-            {this.state.loadPage ? (
-               <div className="column">
-                  {/* Questions Admin */}
-                  <h3>Questions Admin</h3>
-                  <table className="table is-fullwidth">
-                     <thead>
-                        <tr>
-                           <th style={{ paddingLeft: '10%' }}>Questions</th>
-                           <th
-                              style={{
-                                 width: '40%',
-                                 textAlign: 'center'
-                              }}>
-                              Action
-                           </th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {/* questions list */}
-                        {this.questionsList(this.state.questions)}
-                        {/* --- */}
-                     </tbody>
-                  </table>
-                  {/* --- */}
-               </div>
-            ) : (
-               <Loading />
-            )}
-            {/* --- */}
+            <div className="column">
+               {/* Questions Admin */}
+               <h3>Questions Admin</h3>
+               <table className="table is-fullwidth">
+                  <thead>
+                     <tr>
+                        <th style={{ paddingLeft: '10%' }}>Questions</th>
+                        <th
+                           style={{
+                              width: '40%',
+                              textAlign: 'center'
+                           }}>
+                           Action
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {/* questions list */}
+                     {this.questionsList(this.state.questions)}
+                     {/* --- */}
+                  </tbody>
+               </table>
+               {/* --- */}
+            </div>
          </div>
       )
    }
 }
 
-export default AdminQuestions
+export default connect(state => state)(AdminQuestions)
