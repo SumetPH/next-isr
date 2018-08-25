@@ -85,7 +85,6 @@ class Index extends Component {
                         'container has-text-centered': true,
                         'animated pulse': this.state.animate
                      })}>
-                     {/* <h3 className="title is-3">Welcome to Our WebSite.</h3> */}
                      <p className="title is-3">เว็บไซต์ประชาสัมพันธ์</p>
                      <p className="title is-4">
                         โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
@@ -99,6 +98,12 @@ class Index extends Component {
                   </h3>
                </div>
             </div>
+            {/* preload */}
+            <div style={{ display: 'none' }}>
+               <img src="/static/images/anime.gif" alt="" />
+               <img src="/static/icons/login.png" alt="" />
+            </div>
+            {/* --- */}
          </div>
       )
    }

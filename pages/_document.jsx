@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
                   content="width=device-width, initial-scale=1, shrink-to-fit=no"
                />
                <title>Mernstack ISR</title>
-               {/* <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> */}
+               <link rel="shortcut icon" href="/static/icons/shortcut.png" />
                <link rel="stylesheet" href="/static/css/style.css" />
                <link rel="stylesheet" href="/static/css/bulma.css" />
                <link rel="stylesheet" href="/static/css/animate.css" />
