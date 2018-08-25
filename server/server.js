@@ -17,7 +17,7 @@ app.prepare().then(() => {
    const server = express()
 
    // Body Parser
-   server.use(bodyParser.json())
+   server.use(bodyParser.json({ limit: '5mb' }))
    server.use(bodyParser.urlencoded({ extended: false }))
 
    // Engine template
