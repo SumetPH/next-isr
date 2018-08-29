@@ -12,6 +12,7 @@ const mongoose = require('mongoose')
 const question = require('./routes/question')
 const image = require('./routes/image')
 const image360 = require('./routes/image360')
+const professor = require('./routes/professor')
 
 app.prepare().then(() => {
    const server = express()
@@ -36,6 +37,7 @@ app.prepare().then(() => {
    server.use(question)
    server.use(image)
    server.use(image360)
+   server.use(professor)
 
    server.post('/api/login', (req, res) => {
       const { username, password } = req.body
