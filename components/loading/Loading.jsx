@@ -1,18 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 
-class Loading extends Component {
-   render() {
-      return (
-         <div className="hero is-fullheight">
-            <div className="hero-body">
-               <div className="container has-text-centered">
-                  <img src="/static/images/anime.gif" width="80px" alt="" />
-                  <h3>Loading..</h3>
-               </div>
-            </div>
-         </div>
-      )
-   }
+const Loading = ({ bg = "white", color = "black", zIndex = 0 }) => {
+  return (
+    <div
+      style={{
+        backgroundColor: bg,
+        color: color,
+        position: "static",
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: zIndex
+      }}
+    >
+      <div className="has-text-centered">
+        <img src="/static/images/anime.gif" width="100px" alt="" />
+        <h3>Loading..</h3>
+      </div>
+    </div>
+  )
 }
 
 export default Loading

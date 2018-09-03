@@ -1,13 +1,55 @@
 .bg {
-   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url('/static/images/bg.jpeg');
-   background-size: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/static/images/bg.jpeg");
+  background-size: cover;
 }
 
-.m-1 {
-   margin: 1rem;
+.n {
+  position: absolute;
+  width: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(36, 35, 35);
 }
 
-.mt-1 {
-   margin-top: 1rem;
+.n-logo {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  height: 18px;
+}
+
+.n-link-g {
+  display: flex;
+  flex-direction: column;
+}
+
+.n-link {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  margin: 1rem;
+}
+
+.n-link:hover {
+  color: rgb(204, 82, 82);
+}
+
+.n-link-active {
+  color: rgb(204, 82, 82);
+}
+
+.s {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  color: white;
+  background-color: #363636;
+}
+
+.m-5px {
+  margin: 5px;
 }

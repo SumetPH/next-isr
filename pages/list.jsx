@@ -1,91 +1,95 @@
-import React, { Component } from 'react'
-import Link from 'next/link'
-import Router from 'next/router'
+import React, { Component } from "react"
+import Link from "next/link"
 
 // redux
-import { connect } from 'react-redux'
-import { logout } from '../redux/store'
+import { connect } from "react-redux"
 
 // component
-import Loading from '../components/loading/Loading'
-import NoAccess from '../components/noaccess/NoAccess'
+import Loading from "../components/loading/Loading"
+import NoAccess from "../components/noaccess/NoAccess"
+import Navbar from "../components/navbar/Navbar"
 
 class List extends Component {
-   // state
-   state = {
-      loadPage: false
-   }
+  // state
+  state = {
+    loadPage: false
+  }
 
-   // method
-   componentDidMount = () => {
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
-   }
+  // method
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ loadPage: true })
+    }, 1000)
+  }
 
-   logout = () => {
-      Router.push('/')
-      setTimeout(() => {
-         this.props.dispatch(logout())
-      }, 1000)
-   }
+  // render
+  render() {
+    if (!this.state.loadPage) {
+      return <Loading />
+    }
 
-   // render
-   render() {
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+    if (!this.props.isAuth) {
+      return <NoAccess />
+    }
 
-      if (!this.props.isAuth) {
-         return <NoAccess />
-      }
-
-      return (
-         <div className="hero is-fullheight list">
-            <div className="hero-head">
-               <div className="container">
-                  <div className="column">
-                     <div
-                        className="box "
-                        style={{
-                           textAlign: 'center'
-                        }}>
-                        <h1>ISR4B Mern Stack.</h1>
-                     </div>
-                  </div>
-                  <div className="column">
-                     <div className="box ">
-                        <h3>Admin</h3>
-                        <hr />
-                        <p className="mb-1">
-                           <Link href="/admin/questions">
-                              <a>- Questions Management</a>
-                           </Link>
-                        </p>
-                        {/* <p className="mb-1">
-                                    <Link href="/admin/360">
-                                       <a>- Images 360 Management</a>
-                                    </Link>
-                                 </p> */}
-                        <p className="mb-1">
-                           <Link href="/admin/images">
-                              <a>- Images Management</a>
-                           </Link>
-                        </p>
-                     </div>
-                  </div>
-                  <div className="column has-text-centered">
-                     <button
-                        onClick={this.logout}
-                        className="button is-warning">
-                        Logout
-                     </button>
-                  </div>
-               </div>
+    return (
+      <div>
+        <Navbar color="is-danger" />
+        <div className="hero  ">
+          <div className="hero-body">
+            <div className="container">
+              <div className="column">
+                <div
+                  className="box "
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
+                  <h5 className="title is-5">ISR4B Mern Stack.</h5>
+                </div>
+              </div>
+              <div className="column">
+                <div className="box ">
+                  <b>Admin</b>
+                  <hr />
+                  <p style={{ margin: "1rem" }}>
+                    <Link href="/admin/questions">
+                      <a>
+                        <span className="icon m-5px">
+                          <i className="fas fa-question" />
+                        </span>
+                        Questions Management
+                      </a>
+                    </Link>
+                  </p>
+                  <p style={{ margin: "1rem" }}>
+                    <Link href="/admin/professor">
+                      <a>
+                        <span className="icon m-5px">
+                          <i className="fas fa-chalkboard-teacher" />
+                        </span>
+                        Professor Management
+                      </a>
+                    </Link>
+                  </p>
+                  <p style={{ margin: "1rem" }}>
+                    <Link href="/admin/images">
+                      <a>
+                        <span className="icon m-5px">
+                          <i className="fas fa-images" />
+                        </span>
+                        Images Management
+                      </a>
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </div>
-         </div>
-      )
-   }
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default connect(state => state)(List)

@@ -1,0 +1,44 @@
+import React, { Component } from "react"
+import NavbarSide from "../../components/navbar/NavbarSide"
+import Loading from "../../components/loading/Loading"
+
+class Is extends Component {
+  // state
+  state = {
+    loadPage: false
+  }
+
+  // method
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ loadPage: true })
+    }, 1000)
+  }
+
+  render() {
+    return (
+      <div>
+        <NavbarSide />
+        {this.state.loadPage ? (
+          <div className="s">
+            <div className="container">
+              <div
+                className="animated fadeInLeft slow"
+                style={{ margin: "5rem" }}
+              >
+                <h3 className="title is-3 has-text-light">Infomation System</h3>
+                <h3 className="subtitle is-5 has-text-light">
+                  ระบบสาระสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
+                </h3>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <Loading bg="#363636" color="white" zIndex="-1" />
+        )}
+      </div>
+    )
+  }
+}
+
+export default Is
