@@ -23,9 +23,9 @@ class Login extends Component {
       if (res.data.msg === "success") {
         this.props.dispatch(login())
         Router.push("/list")
-        toast.success("Login Success.")
+        toast("✔️ เข้าสู่ระบบสำเร็จ")
       } else {
-        toast.error("Login Fail!")
+        toast("❌ เข้าสู่ระบบไม่สำเร็จ")
         this.refs.form.reset()
       }
     })

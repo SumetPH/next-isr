@@ -77,20 +77,27 @@ class Questions extends Component {
   // render
   render() {
     return (
-      <div className="hero is-fullheight is-info is-bold">
-        <div className="hero-head">
-          <Navbar />
-        </div>
-        <div className="hero-body">
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#209cee"
+        }}
+      >
+        <div style={{ backgroundColor: "#209cee" }}>
+          <div style={{ position: "absolute", width: "100%" }}>
+            <Navbar color="is-info" />
+          </div>
           {this.state.loadPage ? (
             <div className="container">
               {/* QuestionsList */}
-              <div className="column">
+              <div className="column" style={{ paddingTop: "7rem" }}>
                 <div
                   className="box has-background-info has-text-white"
                   style={{ border: "2px white solid" }}
                 >
-                  <h4 className="title is-4">
+                  <h4 className="title is-4 has-text-white">
                     <span className="icon m-5px">
                       <i className="fas fa-question" />
                     </span>
@@ -102,7 +109,7 @@ class Questions extends Component {
 
               {/* Create question */}
               <div className="column">
-                <h4 className="title is-5">
+                <h4 className="title is-5 has-text-white">
                   <span className="icon m-5px">
                     <i className="fas fa-pen" />
                   </span>
@@ -141,10 +148,7 @@ class Questions extends Component {
               </div>
             </div>
           ) : (
-            <Loading
-              bg="linear-gradient(141deg, #04a6d7 0%, #209cee 71%, #3287f5 100%)"
-              color="white"
-            />
+            <Loading bg="#209cee" color="white" />
           )}
         </div>
       </div>

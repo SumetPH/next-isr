@@ -6,9 +6,9 @@ const Loading = ({ bg = "white", color = "black", zIndex = 0 }) => {
       style={{
         backgroundColor: bg,
         color: color,
-        position: "static",
+        position: "absolute",
         width: "100%",
-        height: "100vh",
+        height: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
