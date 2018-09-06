@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavbarSide from '../../components/navbar/NavbarSide'
 import Loading from '../../components/loading/Loading'
 
-class Lesson extends Component {
+export class instructor extends Component {
    // state
    state = {
       loadPage: false
@@ -23,11 +23,13 @@ class Lesson extends Component {
                <div className="s">
                   <div className="container">
                      <div
-                        className="column is-3 animated bounceIn slow"
+                        className="animated fadeInUp slow"
                         style={{ margin: '5rem' }}>
-                        <h3 className="title is-3 has-text-light">Lesson</h3>
+                        <h3 className="title is-3 has-text-light">
+                           Instructor
+                        </h3>
                         <h3 className="subtitle is-5 has-text-light">
-                           โครงสร้างหลักสูตร
+                           อาจารย์ประจำโปรแกรมวิชา
                         </h3>
                      </div>
                   </div>
@@ -40,4 +42,4 @@ class Lesson extends Component {
    }
 }
 
-export default Lesson
+export default instructor

@@ -5,27 +5,26 @@ import { toast } from 'react-toastify'
 
 // redux
 import { connect } from 'react-redux'
-import { login } from '../redux/store'
 
-class Login extends Component {
+class registerUser extends Component {
    // method
-   login = e => {
+   loginUser = e => {
       e.preventDefault()
       axios({
-         url: '/api/login',
+         url: '/api/user/register',
          method: 'POST',
          data: {
+            email: this.refs.email.value,
             username: this.refs.username.value,
             password: this.refs.password.value
          }
       }).then(res => {
          console.log(res.data)
-         if (res.data.msg === 'success') {
-            this.props.dispatch(login())
-            Router.push('/admin')
-            toast.success('เข้าสู่ระบบสำเร็จ')
+         if (res.data.msg === 'Success') {
+            Router.push('/user/login')
+            toast.success('ลงทะเบียนสำเร็จ')
          } else {
-            toast.error('เข้าสู่ระบบไม่สำเร็จ')
+            toast.error('ลงทะเบียนไม่สำเร็จ')
             this.refs.form.reset()
          }
       })
@@ -34,13 +33,13 @@ class Login extends Component {
    // render
    render() {
       return (
-         <div className="hero is-primary is-fullheight">
+         <div className="hero is-danger is-bold is-fullheight">
             <div className="hero-body">
                <div className="container has-text-centered">
                   <div className="column is-4 is-offset-4">
-                     <h3 className="title">Admin Login</h3>
+                     <h3 className="title">Register User</h3>
                      <p className="subtitle" style={{ marginBottom: '70px' }}>
-                        Please Login
+                        Please Register
                      </p>
                      <div className="box animated slideInUp">
                         <div>
@@ -59,7 +58,17 @@ class Login extends Component {
                            <div className="field">
                               <div className="control">
                                  <input
-                                    className="input is-primary"
+                                    className="input is-danger"
+                                    ref="email"
+                                    placeholder="Email"
+                                    type="text"
+                                 />
+                              </div>
+                           </div>
+                           <div className="field">
+                              <div className="control">
+                                 <input
+                                    className="input is-danger"
                                     ref="username"
                                     placeholder="Username"
                                     type="text"
@@ -69,7 +78,7 @@ class Login extends Component {
                            <div className="field">
                               <div className="control">
                                  <input
-                                    className="input is-primary"
+                                    className="input is-danger"
                                     ref="password"
                                     placeholder="Password"
                                     type="password"
@@ -81,9 +90,9 @@ class Login extends Component {
                                  className="control"
                                  style={{ textAlign: 'center' }}>
                                  <button
-                                    onClick={this.login}
-                                    className="button is-primary is-fullwidth">
-                                    Login
+                                    onClick={this.loginUser}
+                                    className="button is-danger is-fullwidth">
+                                    Register
                                  </button>
                               </div>
                            </div>
@@ -97,4 +106,4 @@ class Login extends Component {
    }
 }
 
-export default connect(state => state)(Login)
+export default connect(state => state)(registerUser)

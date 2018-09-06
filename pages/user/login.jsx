@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
 import Router from 'next/router'
+import Link from 'next/link'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
 // redux
 import { connect } from 'react-redux'
-import { login } from '../redux/store'
+import { loginUser } from '../../redux/store'
 
-class Login extends Component {
+class LoginUser extends Component {
    // method
-   login = e => {
+   loginUser = e => {
       e.preventDefault()
       axios({
-         url: '/api/login',
+         url: '/api/user/login',
          method: 'POST',
          data: {
-            username: this.refs.username.value,
+            email: this.refs.email.value,
             password: this.refs.password.value
          }
       }).then(res => {
          console.log(res.data)
-         if (res.data.msg === 'success') {
-            this.props.dispatch(login())
-            Router.push('/admin')
+         if (res.data.msg === 'Success') {
+            this.props.dispatch(loginUser())
+            Router.push('/')
             toast.success('เข้าสู่ระบบสำเร็จ')
          } else {
             toast.error('เข้าสู่ระบบไม่สำเร็จ')
@@ -34,11 +35,11 @@ class Login extends Component {
    // render
    render() {
       return (
-         <div className="hero is-primary is-fullheight">
+         <div className="hero is-info is-bold is-fullheight">
             <div className="hero-body">
                <div className="container has-text-centered">
                   <div className="column is-4 is-offset-4">
-                     <h3 className="title">Admin Login</h3>
+                     <h3 className="title">Login User</h3>
                      <p className="subtitle" style={{ marginBottom: '70px' }}>
                         Please Login
                      </p>
@@ -59,9 +60,9 @@ class Login extends Component {
                            <div className="field">
                               <div className="control">
                                  <input
-                                    className="input is-primary"
-                                    ref="username"
-                                    placeholder="Username"
+                                    className="input is-info"
+                                    ref="email"
+                                    placeholder="Email"
                                     type="text"
                                  />
                               </div>
@@ -69,7 +70,7 @@ class Login extends Component {
                            <div className="field">
                               <div className="control">
                                  <input
-                                    className="input is-primary"
+                                    className="input is-info"
                                     ref="password"
                                     placeholder="Password"
                                     type="password"
@@ -81,10 +82,17 @@ class Login extends Component {
                                  className="control"
                                  style={{ textAlign: 'center' }}>
                                  <button
-                                    onClick={this.login}
-                                    className="button is-primary is-fullwidth">
+                                    onClick={this.loginUser}
+                                    className="button is-info is-fullwidth">
                                     Login
                                  </button>
+                                 <Link href="/user/register">
+                                    <a
+                                       class="button is-danger is-fullwidth"
+                                       style={{ marginTop: '10px' }}>
+                                       Register
+                                    </a>
+                                 </Link>
                               </div>
                            </div>
                         </form>
@@ -97,4 +105,4 @@ class Login extends Component {
    }
 }
 
-export default connect(state => state)(Login)
+export default connect(state => state)(LoginUser)

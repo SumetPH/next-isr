@@ -1,22 +1,22 @@
 const router = require('express').Router()
-const Professor = require('../models/professor')
+const Instructor = require('../models/Instructor')
 
 // get
-router.get('/api/professor/all', (req, res) => {
-   Professor.find().exec((err, data) => {
+router.get('/api/instructor/all', (req, res) => {
+   Instructor.find().exec((err, data) => {
       res.json({ msg: 'Success', res: data })
    })
 })
 
 // post
-router.post('/api/professor/post', (req, res) => {
+router.post('/api/instructor/post', (req, res) => {
    const { firstname, lastname } = req.body
-   const newProfessor = new Professor({
+   const newInstructor = new Instructor({
       firstname,
       lastname
    })
 
-   newProfessor.save(err => {
+   newInstructor.save(err => {
       if (err) {
          return res.json({ msg: 'Error' })
       }
@@ -26,9 +26,9 @@ router.post('/api/professor/post', (req, res) => {
 })
 
 // delete
-router.delete('/api/professor/delete', (req, res) => {
+router.delete('/api/instructor/delete', (req, res) => {
    const { _id } = req.body
-   Professor.findByIdAndRemove(_id).exec(err => {
+   Instructor.findByIdAndRemove(_id).exec(err => {
       if (err) {
          return res.json({ msg: 'Error' })
       }

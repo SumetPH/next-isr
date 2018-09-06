@@ -12,7 +12,8 @@ const mongoose = require('mongoose')
 const question = require('./routes/question')
 const image = require('./routes/image')
 const image360 = require('./routes/image360')
-const professor = require('./routes/professor')
+const instructor = require('./routes/instructor')
+const user = require('./routes/user')
 
 app.prepare().then(() => {
    const server = express()
@@ -37,7 +38,8 @@ app.prepare().then(() => {
    server.use(question)
    server.use(image)
    server.use(image360)
-   server.use(professor)
+   server.use(instructor)
+   server.use(user)
 
    server.post('/api/login', (req, res) => {
       const { username, password } = req.body
@@ -51,6 +53,9 @@ app.prepare().then(() => {
       return app.render(req, res, '/questions/question', { id: req.params.id })
    })
 
+   server.get('/panorama/:id', (req, res) => {
+      res.render('panorama', { img: req.params.id })
+   })
    server.get('*', (req, res) => {
       return handle(req, res)
    })
