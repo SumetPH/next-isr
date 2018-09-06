@@ -88,9 +88,9 @@ class LoginUser extends Component {
                                  </button>
                                  <Link href="/user/register">
                                     <a
-                                       class="button is-danger is-fullwidth"
+                                       class="button is-white is-fullwidth"
                                        style={{ marginTop: '10px' }}>
-                                       Register
+                                       Go to Register
                                     </a>
                                  </Link>
                               </div>
