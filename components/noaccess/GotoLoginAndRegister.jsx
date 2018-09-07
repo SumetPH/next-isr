@@ -20,7 +20,6 @@ const GotoLoginAndReginter = ({ text, color = 'black' }) => {
          <span>หรือ</span>
          <Link href="/user/register">
             <a
-               button
                className="button is-danger is-small is-rounded"
                style={{ margin: '0 1rem' }}>
                <span>ลงทะเบียน</span>

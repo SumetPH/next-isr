@@ -5,14 +5,14 @@ import { toast } from 'react-toastify'
 
 // redux
 import { connect } from 'react-redux'
-import { login } from '../redux/store'
+import { loginAdmin } from '../../redux/store'
 
 class Login extends Component {
    // method
    login = e => {
       e.preventDefault()
       axios({
-         url: '/api/login',
+         url: '/api/admin/login',
          method: 'POST',
          data: {
             username: this.refs.username.value,
@@ -20,8 +20,8 @@ class Login extends Component {
          }
       }).then(res => {
          console.log(res.data)
-         if (res.data.msg === 'success') {
-            this.props.dispatch(login())
+         if (res.data.msg === 'Success') {
+            this.props.dispatch(loginAdmin())
             Router.push('/admin')
             toast.success('เข้าสู่ระบบสำเร็จ')
          } else {
@@ -40,7 +40,7 @@ class Login extends Component {
                   <div className="column is-4 is-offset-4">
                      <h3 className="title">Admin Login</h3>
                      <p className="subtitle" style={{ marginBottom: '70px' }}>
-                        Please Login
+                        สำหรับผู้ดูแล
                      </p>
                      <div className="box animated slideInUp">
                         <div>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 
 // redux
 import { connect } from 'react-redux'
+import { logoutAdmin } from '../../redux/store'
 
 // component
 import Loading from '../../components/loading/Loading'
@@ -20,6 +22,11 @@ class Admin extends Component {
       setTimeout(() => {
          this.setState({ loadPage: true })
       }, 1000)
+   }
+
+   logoutAdmin = async () => {
+      await Router.push('/')
+      await this.props.dispatch(logoutAdmin())
    }
 
    // render
@@ -57,7 +64,7 @@ class Admin extends Component {
                                     <span className="icon m-5px">
                                        <i className="fas fa-question" />
                                     </span>
-                                    Questions Management
+                                    ลบกระทู้คำถาม
                                  </a>
                               </Link>
                            </p>
@@ -67,7 +74,7 @@ class Admin extends Component {
                                     <span className="icon m-5px">
                                        <i className="fas fa-chalkboard-teacher" />
                                     </span>
-                                    Instructor Management
+                                    เพิ่ม / ลบ อาจารย์
                                  </a>
                               </Link>
                            </p>
@@ -77,10 +84,34 @@ class Admin extends Component {
                                     <span className="icon m-5px">
                                        <i className="fas fa-images" />
                                     </span>
-                                    Images Management
+                                    เพิ่ม / ลบ รูปภาพ
                                  </a>
                               </Link>
                            </p>
+                           <p style={{ margin: '1rem' }}>
+                              <Link href="/admin/setting">
+                                 <a>
+                                    <span className="icon m-5px">
+                                       <i className="fas fa-cogs" />
+                                    </span>
+                                    ตั้งค่าระบบ
+                                 </a>
+                              </Link>
+                           </p>
+                        </div>
+                     </div>
+                     <div className="column">
+                        <div
+                           className="box"
+                           style={{
+                              display: 'flex',
+                              justifyContent: 'center'
+                           }}>
+                           <button
+                              className="button is-danger"
+                              onClick={this.logoutAdmin}>
+                              ออกจากระบบ
+                           </button>
                         </div>
                      </div>
                   </div>

@@ -14,6 +14,7 @@ const image = require('./routes/image')
 const image360 = require('./routes/image360')
 const instructor = require('./routes/instructor')
 const user = require('./routes/user')
+const admin = require('./routes/admin')
 
 app.prepare().then(() => {
    const server = express()
@@ -40,14 +41,7 @@ app.prepare().then(() => {
    server.use(image360)
    server.use(instructor)
    server.use(user)
-
-   server.post('/api/login', (req, res) => {
-      const { username, password } = req.body
-      if (username === 'admin' && password === 'admin') {
-         return res.json({ msg: 'success' })
-      }
-      res.json({ msg: 'error' })
-   })
+   server.use(admin)
 
    server.get('/question/:id', (req, res) => {
       return app.render(req, res, '/questions/question', { id: req.params.id })

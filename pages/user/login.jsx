@@ -39,9 +39,9 @@ class LoginUser extends Component {
             <div className="hero-body">
                <div className="container has-text-centered">
                   <div className="column is-4 is-offset-4">
-                     <h3 className="title">Login User</h3>
+                     <h3 className="title">เข้าสู่ระบบ</h3>
                      <p className="subtitle" style={{ marginBottom: '70px' }}>
-                        Please Login
+                        สำหรับผู้ใช้งานทั่วไป
                      </p>
                      <div className="box animated slideInUp">
                         <div>
@@ -88,9 +88,9 @@ class LoginUser extends Component {
                                  </button>
                                  <Link href="/user/register">
                                     <a
-                                       class="button is-white is-fullwidth"
+                                       className="button is-white is-fullwidth"
                                        style={{ marginTop: '10px' }}>
-                                       Go to Register
+                                       สมัครสมาชิก
                                     </a>
                                  </Link>
                               </div>

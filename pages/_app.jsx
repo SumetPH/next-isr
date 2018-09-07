@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import App, { Container } from 'next/app'
 import withRedux from 'next-redux-wrapper'
-import { initStore, login, loginUser } from '../redux/store'
+import { initStore, loginAdmin, loginUser } from '../redux/store'
 import { ToastContainer } from 'react-toastify'
 
 export default withRedux(initStore)(
@@ -17,7 +17,7 @@ export default withRedux(initStore)(
 
       componentDidMount = () => {
          if (localStorage.getItem('isAuth')) {
-            this.props.store.dispatch(login())
+            this.props.store.dispatch(loginAdmin())
          }
          if (localStorage.getItem('isUser')) {
             this.props.store.dispatch(loginUser())

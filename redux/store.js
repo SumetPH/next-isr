@@ -39,7 +39,7 @@ export const reducer = (state = InitialState, action) => {
 }
 
 // ACTIONS
-export const login = () => dispatch => {
+export const loginAdmin = () => dispatch => {
    localStorage.setItem('isAuth', true)
    dispatch({
       type: actionTypes.admin,
@@ -47,7 +47,7 @@ export const login = () => dispatch => {
    })
 }
 
-export const logout = () => dispatch => {
+export const logoutAdmin = () => dispatch => {
    localStorage.removeItem('isAuth')
    dispatch({
       type: actionTypes.admin,

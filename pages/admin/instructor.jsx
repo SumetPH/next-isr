@@ -103,7 +103,7 @@ export class Instructor extends Component {
       return (
          <div className="container">
             <div className="column" style={{ marginTop: '1rem' }}>
-               <h5 className="title is-5">Instructor Management</h5>
+               <h5 className="title is-5">เพิ่ม / ลบ อาจารย์</h5>
                <div className="box">
                   <table className="table is-striped is-fullwidth">
                      <thead>

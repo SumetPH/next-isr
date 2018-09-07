@@ -37,9 +37,9 @@ class registerUser extends Component {
             <div className="hero-body">
                <div className="container has-text-centered">
                   <div className="column is-4 is-offset-4">
-                     <h3 className="title">Register User</h3>
+                     <h3 className="title">สมัครสมาชิก</h3>
                      <p className="subtitle" style={{ marginBottom: '70px' }}>
-                        Please Register
+                        สำหรับผู้ใช้งานทั่วไป
                      </p>
                      <div className="box animated slideInUp">
                         <div>
