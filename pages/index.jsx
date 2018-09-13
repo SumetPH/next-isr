@@ -33,6 +33,8 @@ class Index extends Component {
                      <p className="title is-3">เว็บไซต์ประชาสัมพันธ์</p>
                      <p className="title is-4">
                         โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
+                        <br />
+                        ด้วยเทคนิคสมัยใหม่ (Mern Stack)
                      </p>
                      <p className="subtitle is-4">Infomation System.</p>
                   </div>
