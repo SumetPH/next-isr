@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import axios from 'axios'
 
 // redux
@@ -24,11 +24,7 @@ class AdminQuestions extends Component {
 
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
-         this.setState({ questions: res.data.questions })
-
-         setTimeout(() => {
-            this.setState({ loadPage: true })
-         }, 1000)
+         this.setState({ questions: res.data.questions, loadPage: true })
       })
    }
 
@@ -55,7 +51,7 @@ class AdminQuestions extends Component {
          return (
             <tr key={item._id}>
                <td>
-                  <Link href={`/question/${item._id}`}>
+                  <Link route={`/question/${item._id}`}>
                      <a>{item.title}</a>
                   </Link>
                </td>

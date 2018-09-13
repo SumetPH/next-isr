@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const Question = require('../models/Question')
-const Answer = require('../models/Answer')
+const Question = require('../../models/Question')
+const Answer = require('../../models/Answer')
 
 // get all questions
 router.get('/api/question/all', (req, res) => {

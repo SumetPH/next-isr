@@ -22,7 +22,8 @@ class Question extends Component {
    state = {
       question: [],
       loadPage: false,
-      isLoading: false
+      isLoading: false,
+      isDelete: {}
    }
 
    // method
@@ -42,15 +43,10 @@ class Question extends Component {
          method: 'post',
          data: { questionId }
       }).then(res => {
-         console.log(res.data)
          if (res.data.msg === 'Error' || res.data.res === null) {
             return Router.push('/questions')
          }
-         this.setState({ question: res.data.question })
-
-         setTimeout(() => {
-            this.setState({ loadPage: true })
-         }, 1000)
+         this.setState({ question: res.data.question, loadPage: true })
       })
    }
 
@@ -78,6 +74,10 @@ class Question extends Component {
    }
 
    deleteComment = answerId => {
+      const { isDelete } = this.state
+      isDelete[answerId] = true
+      this.setState({ isDelete })
+
       axios({
          url: '/api/answer/delete',
          method: 'Delete',
@@ -109,7 +109,10 @@ class Question extends Component {
                      </small>
                      {this.props.isAuth === false ? null : (
                         <button
-                           className="button is-danger is-small"
+                           className={classNames({
+                              'button is-danger is-small': true,
+                              'is-loading': this.state.isDelete[item._id]
+                           })}
                            onClick={() => this.deleteComment(item._id)}>
                            Del
                         </button>

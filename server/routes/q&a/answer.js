@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const Answer = require('../models/Answer')
-const Question = require('../models/Question')
+const Answer = require('../../models/Answer')
+const Question = require('../../models/Question')
 
 // get answers
 router.get('/api/answer/all', (req, res) => {
@@ -15,6 +15,9 @@ router.get('/api/answer/all', (req, res) => {
 router.post('/api/answer/create', (req, res) => {
    const { questionId, body, username, created } = req.body
    Question.findById(questionId).exec((err, question) => {
+      if (err || question === null) {
+         return res.json({ msg: 'Error', err })
+      }
       const newAnswer = new Answer({ question, body, username, created })
       newAnswer.save(err => {
          if (err) {
