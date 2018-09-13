@@ -49,7 +49,8 @@ class Index extends Component {
             </div>
             {/* preload */}
             <div style={{ display: 'none' }}>
-               <img src="/static/images/anime.gif" alt="" />
+               <img src="/static/icons/isr4b.png" alt="" />
+               <img src="/static/icons/isr4b-black.png" alt="" />
                <img src="/static/icons/login.png" alt="" />
             </div>
             {/* --- */}
