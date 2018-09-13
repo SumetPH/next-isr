@@ -74,81 +74,83 @@ export class setting extends Component {
 
       return (
          <div className="container">
-            <div className="column">
-               <div className="box">
-                  <h5
-                     className="title is-5 has-text-centered"
-                     style={{ marginTop: '1rem' }}>
-                     ตั้งค่าระบบ
-                  </h5>
+            <div className="columns">
+               <div className="column" style={{ marginTop: '1rem' }}>
+                  <div className="box">
+                     <h5 className="title is-5 has-text-centered">
+                        ตั้งค่าระบบ
+                     </h5>
+                  </div>
                </div>
             </div>
-            <div className="column">
-               <div className="box">
-                  <h6 className="title is-6">
-                     เปลี่ยนชื่อผู้ใช้ (Username Admin)
-                  </h6>
-                  <form ref="changeUsername">
-                     <div className="column">
-                        <small>ชื่อผู้ใช้ใหม่</small>
-                        <input
-                           type="text"
-                           className="input"
-                           ref="newUsername"
-                           placeholder="ชื่อผู้ใช้ใหม่"
-                        />
-                     </div>
-                     <div className="column">
-                        <small>รหัสผ่าน</small>
-                        <input
-                           type="text"
-                           className="input"
-                           ref="oldPassword1"
-                           placeholder="รหัสผ่าน"
-                        />
-                     </div>
-                     <div className="column">
-                        <button
-                           className="button is-primary"
-                           onClick={this.changeUsername}>
-                           บันทึก
-                        </button>
-                     </div>
-                  </form>
+            <div className="columns">
+               <div className="column">
+                  <div className="box">
+                     <h6 className="title is-6">
+                        เปลี่ยนชื่อผู้ใช้ (Username Admin)
+                     </h6>
+                     <form ref="changeUsername">
+                        <div className="column">
+                           <small>ชื่อผู้ใช้ใหม่</small>
+                           <input
+                              type="text"
+                              className="input"
+                              ref="newUsername"
+                              placeholder="ชื่อผู้ใช้ใหม่"
+                           />
+                        </div>
+                        <div className="column">
+                           <small>รหัสผ่าน</small>
+                           <input
+                              type="text"
+                              className="input"
+                              ref="oldPassword1"
+                              placeholder="รหัสผ่าน"
+                           />
+                        </div>
+                        <div className="column">
+                           <button
+                              className="button is-primary"
+                              onClick={this.changeUsername}>
+                              บันทึก
+                           </button>
+                        </div>
+                     </form>
+                  </div>
                </div>
-            </div>
-            <div className="column">
-               <div className="box">
-                  <h6 className="title is-6">
-                     เปลี่ยนรหัสผ่าน (Password Admin)
-                  </h6>
-                  <form ref="changePassword">
-                     <div className="column">
-                        <small>รหัสผ่านใหม่</small>
-                        <input
-                           type="text"
-                           className="input"
-                           ref="newPassword"
-                           placeholder="รหัสผ่านใหม่"
-                        />
-                     </div>
-                     <div className="column">
-                        <small>รหัสผ่านเดิม</small>
-                        <input
-                           type="text"
-                           className="input"
-                           ref="oldPassword2"
-                           placeholder="รหัสผ่านเดิม"
-                        />
-                     </div>
-                     <div className="column">
-                        <button
-                           className="button is-warning"
-                           onClick={this.changePassword}>
-                           บันทึก
-                        </button>
-                     </div>
-                  </form>
+               <div className="column">
+                  <div className="box">
+                     <h6 className="title is-6">
+                        เปลี่ยนรหัสผ่าน (Password Admin)
+                     </h6>
+                     <form ref="changePassword">
+                        <div className="column">
+                           <small>รหัสผ่านใหม่</small>
+                           <input
+                              type="text"
+                              className="input"
+                              ref="newPassword"
+                              placeholder="รหัสผ่านใหม่"
+                           />
+                        </div>
+                        <div className="column">
+                           <small>รหัสผ่านเดิม</small>
+                           <input
+                              type="text"
+                              className="input"
+                              ref="oldPassword2"
+                              placeholder="รหัสผ่านเดิม"
+                           />
+                        </div>
+                        <div className="column">
+                           <button
+                              className="button is-warning"
+                              onClick={this.changePassword}>
+                              บันทึก
+                           </button>
+                        </div>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>
