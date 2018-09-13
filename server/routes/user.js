@@ -44,7 +44,7 @@ router.post('/api/user/login', (req, res) => {
       return res.json({
          msg: 'Success',
          status: true,
-         doc: { email: doc.email, user: doc.user }
+         username: doc.username
       })
    })
 })

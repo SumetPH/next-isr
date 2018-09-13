@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import Router from 'next/router'
 
 // redux
@@ -59,7 +59,7 @@ class Admin extends Component {
                            <b>Admin</b>
                            <hr />
                            <p style={{ margin: '1rem' }}>
-                              <Link href="/admin/questions">
+                              <Link route="/admin/questions">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-question" />
@@ -69,7 +69,7 @@ class Admin extends Component {
                               </Link>
                            </p>
                            <p style={{ margin: '1rem' }}>
-                              <Link href="/admin/instructor">
+                              <Link route="/admin/instructor">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-chalkboard-teacher" />
@@ -79,7 +79,7 @@ class Admin extends Component {
                               </Link>
                            </p>
                            <p style={{ margin: '1rem' }}>
-                              <Link href="/admin/images">
+                              <Link route="/admin/images">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-images" />
@@ -89,7 +89,7 @@ class Admin extends Component {
                               </Link>
                            </p>
                            <p style={{ margin: '1rem' }}>
-                              <Link href="/admin/setting">
+                              <Link route="/admin/setting">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-cogs" />

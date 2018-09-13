@@ -24,7 +24,7 @@ class AdminQuestions extends Component {
 
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
-         this.setState({ questions: res.data.res })
+         this.setState({ questions: res.data.questions })
 
          setTimeout(() => {
             this.setState({ loadPage: true })
@@ -32,14 +32,17 @@ class AdminQuestions extends Component {
       })
    }
 
-   deteteQuestion = _id => {
+   deteteQuestion = questionId => {
       let isLoading = this.state.isLoading
-      isLoading[_id] = 'is-loading'
+      isLoading[questionId] = 'is-loading'
       this.setState({ isLoading })
 
       axios({
-         url: `/api/question/delete/${_id}`,
-         method: 'DELETE'
+         url: `/api/question/delete`,
+         method: 'DELETE',
+         data: {
+            questionId
+         }
       }).then(res => {
          console.log(res.data)
          this.loadQuestions()

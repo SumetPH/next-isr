@@ -36,7 +36,9 @@ class Index extends Component {
                         <br />
                         ด้วยเทคนิคสมัยใหม่ (Mern Stack)
                      </p>
-                     <p className="subtitle is-4">Infomation System.</p>
+                     <p className="subtitle is-5 animated zoomIn delay-1s">
+                        Infomation System.
+                     </p>
                   </div>
                </div>
                <div className="hero-foot">

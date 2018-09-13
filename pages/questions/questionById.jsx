@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import Router from 'next/router'
 import axios from 'axios'
 import classNames from 'classnames'
@@ -15,7 +15,7 @@ import Goto from '../../components/noaccess/GotoLoginAndRegister'
 
 class Question extends Component {
    static getInitialProps({ query }) {
-      return { id: query.id }
+      return { questionId: query.questionId }
    }
 
    // state
@@ -36,13 +36,17 @@ class Question extends Component {
    }
 
    loadQuestion = () => {
-      const { id } = this.props
-      axios.get(`/api/question/get/${id}`).then(res => {
+      const { questionId } = this.props
+      axios({
+         url: '/api/question/id',
+         method: 'post',
+         data: { questionId }
+      }).then(res => {
          console.log(res.data)
          if (res.data.msg === 'Error' || res.data.res === null) {
             return Router.push('/questions')
          }
-         this.setState({ question: res.data.res })
+         this.setState({ question: res.data.question })
 
          setTimeout(() => {
             this.setState({ loadPage: true })
@@ -53,15 +57,16 @@ class Question extends Component {
    addComment = e => {
       e.preventDefault()
 
-      const { id } = this.props
+      const { questionId, username } = this.props
       this.setState({ isLoading: true })
 
       axios({
-         url: '/api/question/create/answer',
+         url: '/api/answer/create',
          method: 'POST',
          data: {
-            questionId: id,
+            questionId: questionId,
             body: this.refs.comment.value,
+            username: username,
             created: new Date()
          }
       }).then(res => {
@@ -72,16 +77,44 @@ class Question extends Component {
       })
    }
 
+   deleteComment = answerId => {
+      axios({
+         url: '/api/answer/delete',
+         method: 'Delete',
+         data: {
+            answerId
+         }
+      }).then(res => {
+         console.log(res.data)
+         this.loadQuestion()
+      })
+   }
+
    // view
    answersView = (answers = []) => {
       const answersList = answers.map(item => {
          return (
             <div key={item._id}>
                <p>{item.body}</p>
-               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <small>
-                     โพสต์เมื่อ : {new Date(item.created).toLocaleDateString()}
-                  </small>
+               <div
+                  style={{
+                     display: 'flex',
+                     justifyContent: 'flex-end'
+                  }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                     <small>โดย : {item.username}</small>
+                     <small>
+                        โพสต์เมื่อ :{' '}
+                        {new Date(item.created).toLocaleDateString()}
+                     </small>
+                     {this.props.isAuth === false ? null : (
+                        <button
+                           className="button is-danger is-small"
+                           onClick={() => this.deleteComment(item._id)}>
+                           Del
+                        </button>
+                     )}
+                  </div>
                </div>
                <hr />
             </div>
@@ -120,7 +153,7 @@ class Question extends Component {
                            <i className="far fa-compass" />
                         </span>
                         <li>
-                           <Link href="/questions">
+                           <Link route="/questions">
                               <a>คำถาม</a>
                            </Link>
                         </li>

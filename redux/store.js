@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 const InitialState = {
    isAuth: false,
    isUser: false,
+   username: '',
    logo: '/static/icons/isr4b.png'
 }
 
@@ -25,7 +26,8 @@ export const reducer = (state = InitialState, action) => {
       case actionTypes.user:
          return {
             ...state,
-            isUser: action.isUser
+            isUser: action.isUser,
+            username: action.username
          }
       case actionTypes.logo:
          return {
@@ -69,16 +71,19 @@ export const logoWhite = () => dispatch => {
    })
 }
 
-export const loginUser = () => dispatch => {
+export const loginUser = ({ username }) => dispatch => {
    localStorage.setItem('isUser', true)
+   localStorage.setItem('username', username)
    dispatch({
       type: actionTypes.user,
-      isUser: true
+      isUser: true,
+      username: username
    })
 }
 
 export const logoutUser = () => dispatch => {
    localStorage.removeItem('isUser')
+   localStorage.removeItem('username')
    dispatch({
       type: actionTypes.user,
       isAuth: false

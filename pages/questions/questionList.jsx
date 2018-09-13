@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import Fade from 'react-reveal/Fade'
 import classnames from 'classnames'
 
@@ -25,13 +25,17 @@ class Questions extends Component {
       this.loadQuestions()
    }
 
+   componentWillUnmount = () => {
+      clearInterval(this.interval)
+   }
+
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
          this.setState({
-            questions: res.data.res
+            questions: res.data.questions
          })
 
-         setTimeout(() => {
+         this.interval = setTimeout(() => {
             this.setState({ loadPage: true })
          }, 1000)
       })
@@ -43,11 +47,12 @@ class Questions extends Component {
       this.setState({ isLoading: true })
 
       axios({
-         url: '/api/question/create/post',
+         url: '/api/question/create',
          method: 'POST',
          data: {
             title: this.refs.title.value,
             body: this.refs.body.value,
+            username: this.props.username,
             created: new Date()
          }
       }).then(res => {
@@ -64,9 +69,11 @@ class Questions extends Component {
          return (
             <Fade key={item._id}>
                <div className="column">
-                  <Link href={`/question/${item._id}`}>
+                  <Link route={`/question/${item._id}`}>
                      <a className="box has-text-dark">
                         <p>คำถาม : {item.title}</p>
+                        <small>โดย : {item.username}</small>
+                        <br />
                         <small>คำตอบ : {item.answers.length}</small>
                         <br />
                         <small>

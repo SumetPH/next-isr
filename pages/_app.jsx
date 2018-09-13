@@ -20,7 +20,8 @@ export default withRedux(initStore)(
             this.props.store.dispatch(loginAdmin())
          }
          if (localStorage.getItem('isUser')) {
-            this.props.store.dispatch(loginUser())
+            const username = localStorage.getItem('username')
+            this.props.store.dispatch(loginUser({ username: username }))
          }
       }
 

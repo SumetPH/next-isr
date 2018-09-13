@@ -1,35 +1,42 @@
 const router = require('express').Router()
 const Question = require('../models/Question')
+const Answer = require('../models/Answer')
 
 // get all questions
 router.get('/api/question/all', (req, res) => {
-   Question.find().exec((err, questions) =>
-      res.json({
-         msg: 'Success',
-         res: questions
-      })
-   )
+   Question.find()
+      .populate('answers')
+      .exec((err, questions) =>
+         res.json({
+            msg: 'Success',
+            questions
+         })
+      )
 })
 
 // get question by id
-router.get('/api/question/get/:id', (req, res) => {
-   Question.findById(req.params.id).exec((err, question) => {
-      if (err) {
-         return res.json({ msg: 'Error', res: err })
-      }
-      res.json({
-         msg: 'Success',
-         res: question
+router.post('/api/question/id', (req, res) => {
+   const { questionId } = req.body
+   Question.findById(questionId)
+      .populate('answers')
+      .exec((err, question) => {
+         if (err || question === null) {
+            return res.json({ msg: 'Error', res: err })
+         }
+         res.json({
+            msg: 'Success',
+            question
+         })
       })
-   })
 })
 
 // create post
-router.post('/api/question/create/post', (req, res) => {
-   const { title, body, created } = req.body
+router.post('/api/question/create', (req, res) => {
+   const { title, body, username, created } = req.body
    const newQuestion = new Question({
       title,
       body,
+      username,
       created
    })
 
@@ -41,49 +48,21 @@ router.post('/api/question/create/post', (req, res) => {
          })
       }
 
-      res.json({ msg: 'Saved' })
+      res.json({ msg: 'Success' })
    })
 })
 
 // delete post
-router.delete('/api/question/delete/:id', (req, res) => {
-   const id = req.params.id
-   Question.findOneAndRemove({ _id: id }).exec(err => {
+router.delete('/api/question/delete', (req, res) => {
+   const { questionId } = req.body
+   Question.findByIdAndRemove(questionId).exec(err => {
       if (err) {
          return res.json({
             msg: 'Error',
             res: err
          })
       }
-      res.json({ msg: 'Deleted' })
-   })
-})
-
-// create answer
-router.post('/api/question/create/answer', (req, res) => {
-   const { questionId, body, created } = req.body
-
-   Question.findById(questionId).exec((err, question) => {
-      if (err || question === null) {
-         return res.json({
-            msg: 'Error',
-            res: err
-         })
-      }
-      const newAnswer = {
-         body,
-         created
-      }
-      question.answers.push(newAnswer)
-      question.save(err => {
-         if (err) {
-            return res.json({
-               msg: 'Error',
-               res: err
-            })
-         }
-         res.json({ msg: 'Saved' })
-      })
+      res.json({ msg: 'Success' })
    })
 })
 

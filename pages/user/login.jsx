@@ -22,7 +22,7 @@ class LoginUser extends Component {
       }).then(res => {
          console.log(res.data)
          if (res.data.msg === 'Success') {
-            this.props.dispatch(loginUser())
+            this.props.dispatch(loginUser({ username: res.data.username }))
             Router.push('/')
             toast.success('เข้าสู่ระบบสำเร็จ')
          } else {

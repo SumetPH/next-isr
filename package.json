@@ -19,6 +19,7 @@
       "mongoose": "5.2.8",
       "next": "^6.1.1",
       "next-redux-wrapper": "^2.0.0",
+      "next-routes": "^1.4.2",
       "react": "^16.4.2",
       "react-dom": "^16.4.2",
       "react-file-base64": "^1.0.3",

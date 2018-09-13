@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 
 const GotoLoginAndReginter = ({ text, color = 'black' }) => {
    return (
@@ -10,7 +10,7 @@ const GotoLoginAndReginter = ({ text, color = 'black' }) => {
             justifyContent: 'center',
             color: color
          }}>
-         <Link href="/user/login">
+         <Link route="/user/login">
             <a
                className="button is-warning is-small is-rounded"
                style={{ margin: '0 1rem' }}>
@@ -18,7 +18,7 @@ const GotoLoginAndReginter = ({ text, color = 'black' }) => {
             </a>
          </Link>
          <span>หรือ</span>
-         <Link href="/user/register">
+         <Link route="/user/register">
             <a
                className="button is-danger is-small is-rounded"
                style={{ margin: '0 1rem' }}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 
 const NoAccess = () => {
    return (
@@ -7,7 +7,7 @@ const NoAccess = () => {
          <div className="hero-body">
             <div className="container has-text-centered">
                <h3 className="title is-3">คุณไม่มีสิทธิในการเข้าถึง</h3>
-               <Link href="/">
+               <Link route="/">
                   <a className="button is-outlined is-danger">
                      กลับไปยังหน้าแรก
                   </a>

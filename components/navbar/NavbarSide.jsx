@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import classnames from 'classnames'
 
 export class Navbar extends Component {
@@ -8,7 +8,7 @@ export class Navbar extends Component {
       is: false,
       instructor: false,
       lesson: false,
-      image: false
+      images: false
    }
 
    // method
@@ -18,15 +18,20 @@ export class Navbar extends Component {
    }
 
    linkActive = path => {
-      this.setState({ is: false, instructor: false, lesson: false })
+      this.setState({
+         is: false,
+         instructor: false,
+         lesson: false,
+         images: false
+      })
       if (path === '/branch/is') {
          this.setState({ is: true })
       } else if (path === '/branch/instructor') {
          this.setState({ instructor: true })
       } else if (path === '/branch/lesson') {
          this.setState({ lesson: true })
-      } else if (path === '/branch/image') {
-         this.setState({ image: true })
+      } else if (path === '/branch/images') {
+         this.setState({ images: true })
       }
    }
 
@@ -37,7 +42,7 @@ export class Navbar extends Component {
                <img src="/static/icons/is.png" alt="" />
             </div>
             <div className="n-link-g">
-               <Link href="/branch/is">
+               <Link route="/branch/is">
                   <a
                      className={classnames({
                         'n-link': true,
@@ -48,7 +53,7 @@ export class Navbar extends Component {
                      </span>
                   </a>
                </Link>
-               <Link href="/branch/instructor">
+               <Link route="/branch/instructor">
                   <a
                      className={classnames({
                         'n-link': true,
@@ -59,7 +64,7 @@ export class Navbar extends Component {
                      </span>
                   </a>
                </Link>
-               <Link href="/branch/lesson">
+               <Link route="/branch/lesson">
                   <a
                      className={classnames({
                         'n-link': true,
@@ -70,11 +75,11 @@ export class Navbar extends Component {
                      </span>
                   </a>
                </Link>
-               <Link href="/branch/image">
+               <Link route="/branch/images">
                   <a
                      className={classnames({
                         'n-link': true,
-                        'n-link-active': this.state.image
+                        'n-link-active': this.state.images
                      })}>
                      <span className="icon">
                         <i className="fas fa-images" />
@@ -83,7 +88,7 @@ export class Navbar extends Component {
                </Link>
             </div>
             <div className="n-link-g">
-               <Link href="/">
+               <Link route="/">
                   <a className="n-link">
                      <span className="icon">
                         <i className="fas fa-angle-double-left" />

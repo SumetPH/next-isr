@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
+import { Link } from '../../routes'
 import Router from 'next/router'
 import classnames from 'classnames'
 
@@ -64,10 +64,10 @@ export class Navbar extends Component {
                id="navbarMenuHeroA">
                {/* end */}
                <div className="navbar-end">
-                  <Link href="/">
+                  <Link route="/">
                      <a className="navbar-item">หน้าแรก</a>
                   </Link>
-                  <Link href="/branch/is">
+                  <Link route="/branch/is">
                      <a
                         className={classnames({
                            'navbar-item': true,
@@ -76,10 +76,10 @@ export class Navbar extends Component {
                         สาขาวิชา
                      </a>
                   </Link>
-                  <Link href="/questions">
+                  <Link route="/questions">
                      <a className="navbar-item">กระทู้ถามตอบ</a>
                   </Link>
-                  <Link href={isAuth ? '/admin' : '/admin/login'}>
+                  <Link route={isAuth ? '/admin' : '/admin/login'}>
                      <a className="navbar-item">สำหรับผู้ดูแล</a>
                   </Link>
                   <span className="navbar-item">
@@ -95,7 +95,7 @@ export class Navbar extends Component {
                            </span>
                         </button>
                      ) : (
-                        <Link href="/user/login">
+                        <Link route="/user/login">
                            <a className="button is-primary is-rounded">
                               <span className="icon">
                                  <i className="fas fa-key" />
