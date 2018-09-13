@@ -15,8 +15,19 @@ const Loading = ({ bg = 'white', color = 'black', zIndex = 0 }) => {
             zIndex: zIndex
          }}>
          <div className="has-text-centered">
-            <img src="/static/images/anime.gif" width="100px" alt="" />
-            <h3>Loading..</h3>
+            <img
+               className="animated bounce infinite"
+               src={
+                  color === 'black'
+                     ? '/static/icons/isr4b-black.png'
+                     : '/static/icons/isr4b.png'
+               }
+               width="100px"
+               alt=""
+            />
+            <div>
+               <small>Loading...</small>
+            </div>
          </div>
       </div>
    )
