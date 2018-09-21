@@ -3,6 +3,8 @@ const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
+const localhost = process.env.localhost || 'localhost:3000'
+
 // get all user
 router.get('/api/user', (req, res) => {
    User.find().exec((err, doc) => {
@@ -43,8 +45,8 @@ router.post('/api/user/register', (req, res) => {
          from: '<mernstack-isr@no-reply.com>',
          to: req.body.email,
          subject: 'Register Verify',
-         text: `Please confirm your account by clicking the following link : http://mernstack-isr.herokuapp.com/api/user/register/${token}`,
-         html: `<b>Please confirm your account by clicking the following link : <a href='http://mernstack-isr.herokuapp.com/api/user/register/${token}'>Click Here</a></b>`
+         text: `Please confirm your account by clicking the following link : http://${localhost}/api/user/register/${token}`,
+         html: `<b>Please confirm your account by clicking the following link : <a href='http://${localhost}/api/user/register/${token}'>Click Here</a></b>`
       }
 
       // send mail with defined transport object
