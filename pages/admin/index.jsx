@@ -89,6 +89,16 @@ class Admin extends Component {
                               </Link>
                            </p>
                            <p style={{ margin: '1rem' }}>
+                              <Link route="/admin/user">
+                                 <a>
+                                    <span className="icon m-5px">
+                                       <i className="fas fa-images" />
+                                    </span>
+                                    ลบสมาชิก
+                                 </a>
+                              </Link>
+                           </p>
+                           <p style={{ margin: '1rem' }}>
                               <Link route="/admin/setting">
                                  <a>
                                     <span className="icon m-5px">

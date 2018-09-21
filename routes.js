@@ -8,6 +8,7 @@ module.exports = routes()
    .add('/admin/instructor', '/admin/instructor')
    .add('/admin/login', '/admin/login')
    .add('/admin/setting', '/admin/setting')
+   .add('/admin/user', '/admin/user')
 
    .add('/branch/is', '/branch/is')
    .add('/branch/instructor', '/branch/instructor')

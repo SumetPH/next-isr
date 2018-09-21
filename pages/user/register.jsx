@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import classnames from 'classnames'
 
 // redux
 import { connect } from 'react-redux'
 
 class registerUser extends Component {
+   state = {
+      isLoading: false
+   }
    // method
    loginUser = e => {
       e.preventDefault()
+      this.setState({ isLoading: true })
       axios({
          url: '/api/user/register',
          method: 'POST',
@@ -22,11 +27,15 @@ class registerUser extends Component {
          console.log(res.data)
          if (res.data.msg === 'Success') {
             Router.push('/user/login')
-            toast.success('ลงทะเบียนสำเร็จ')
+            toast.info(
+               'เราได้ส่งอีเมลยืนยันไปยังอีเมลของท่านแล้ว กรุณายืนยันทำการยืนยันเพื่อเข้าใช้งาน',
+               { autoClose: 10000 }
+            )
          } else {
             toast.error('ลงทะเบียนไม่สำเร็จ')
             this.refs.form.reset()
          }
+         this.setState({ isLoading: false })
       })
    }
 
@@ -91,7 +100,10 @@ class registerUser extends Component {
                                  style={{ textAlign: 'center' }}>
                                  <button
                                     onClick={this.loginUser}
-                                    className="button is-danger is-fullwidth">
+                                    className={classnames({
+                                       'button is-danger is-fullwidth': true,
+                                       'is-loading': this.state.isLoading
+                                    })}>
                                     Register
                                  </button>
                               </div>
