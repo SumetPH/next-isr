@@ -30,6 +30,9 @@ class Question extends Component {
    componentDidMount = () => {
       this.props.dispatch(logoBlack())
       this.loadQuestion()
+      this.interval = setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    componentWillUnmount = () => {
@@ -48,10 +51,6 @@ class Question extends Component {
             return Router.push('/questions')
          }
          this.setState({ question: res.data.question })
-
-         this.interval = setTimeout(() => {
-            this.setState({ loadPage: true })
-         }, 1000)
       })
    }
 

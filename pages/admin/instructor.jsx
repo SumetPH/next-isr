@@ -20,6 +20,9 @@ export class Instructor extends Component {
    // method
    componentDidMount = () => {
       this.loadInstructor()
+      setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    loadInstructor = () => {
@@ -27,10 +30,6 @@ export class Instructor extends Component {
          console.log(res.data)
          this.setState({ instructors: res.data.res })
       })
-
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    addInstructor = e => {
