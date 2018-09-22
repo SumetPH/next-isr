@@ -20,15 +20,16 @@ class AdminQuestions extends Component {
    // method
    componentDidMount = () => {
       this.loadQuestions()
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
          this.setState({ questions: res.data.questions })
       })
+
+      setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    deteteQuestion = questionId => {
@@ -52,7 +53,7 @@ class AdminQuestions extends Component {
    questionsList = questions => {
       return questions.map(item => {
          return (
-            <tr key={item._id}>
+            <tr className="animated fadeIn" key={item._id}>
                <td>
                   <Link route={`/question/${item._id}`}>
                      <a>{item.title}</a>

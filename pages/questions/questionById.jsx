@@ -30,9 +30,6 @@ class Question extends Component {
    componentDidMount = () => {
       this.props.dispatch(logoBlack())
       this.loadQuestion()
-      this.interval = setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    componentWillUnmount = () => {
@@ -52,6 +49,10 @@ class Question extends Component {
          }
          this.setState({ question: res.data.question })
       })
+
+      this.interval = setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    addComment = e => {
@@ -99,16 +100,18 @@ class Question extends Component {
       const answersList = answers.map(item => {
          return (
             <div key={item._id}>
-               <p>{item.body}</p>
+               <p className="animated fadeIn">{item.body}</p>
                <div
                   style={{
                      display: 'flex',
                      justifyContent: 'flex-end'
                   }}>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
-                     <small>โดย : {item.username}</small>
-                     <small>
-                        โพสต์เมื่อ :{' '}
+                     <small className="animated fadeIn">
+                        โดย : {item.username}
+                     </small>
+                     <small className="animated fadeIn">
+                        โพสต์เมื่อ :
                         {new Date(item.created).toLocaleDateString()}
                      </small>
                      {this.props.isAuth === false ? null : (
@@ -174,9 +177,10 @@ class Question extends Component {
                {/* Question */}
                <div className="column">
                   <div className="box">
-                     <b>หัวข้อ : {title}</b>
-                     <p>{body}</p>
+                     <b className="animated fadeIn">หัวข้อ : {title}</b>
+                     <p className="animated fadeIn">{body}</p>
                      <div
+                        className="animated fadeIn"
                         style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <small>
                            โพสต์เมื่อ : {new Date(created).toLocaleDateString()}

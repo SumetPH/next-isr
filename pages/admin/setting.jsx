@@ -100,12 +100,12 @@ export class setting extends Component {
                            />
                         </div>
                         <div className="column">
-                           <small>รหัสผ่าน</small>
+                           <small>รหัสผ่านปัจจุบัน</small>
                            <input
                               type="text"
                               className="input"
                               ref="oldPassword1"
-                              placeholder="รหัสผ่าน"
+                              placeholder="รหัสผ่านปัจจุบัน"
                            />
                         </div>
                         <div className="column">
@@ -134,12 +134,12 @@ export class setting extends Component {
                            />
                         </div>
                         <div className="column">
-                           <small>รหัสผ่านเดิม</small>
+                           <small>รหัสผ่านปัจจุบัน</small>
                            <input
                               type="text"
                               className="input"
                               ref="oldPassword2"
-                              placeholder="รหัสผ่านเดิม"
+                              placeholder="รหัสผ่านปัจจุบัน"
                            />
                         </div>
                         <div className="column">

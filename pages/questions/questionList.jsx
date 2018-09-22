@@ -23,9 +23,6 @@ class Questions extends Component {
    // method
    componentDidMount = () => {
       this.loadQuestions()
-      this.interval = setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    componentWillUnmount = () => {
@@ -38,6 +35,10 @@ class Questions extends Component {
             questions: res.data.questions
          })
       })
+
+      this.interval = setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    // method

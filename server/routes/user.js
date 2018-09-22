@@ -30,13 +30,14 @@ router.delete('/api/user', (req, res) => {
 router.post('/api/user/register', (req, res) => {
    const { email, username, password } = req.body
    const token = jwt.sign({ email, username, password }, 'mernstack-isr')
+
    nodemailer.createTestAccount((err, account) => {
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
          service: 'gmail',
          auth: {
-            user: 'mernstack.isr@gmail.com', // generated ethereal user
-            pass: 'isr605222' // generated ethereal password
+            user: 'mernstack.isr@gmail.com',
+            pass: 'isr605222'
          }
       })
 
@@ -66,7 +67,7 @@ router.get('/api/user/register/:token', (req, res) => {
    const { email, username, password } = decode
    User.findOne({ email }).exec((err, doc) => {
       if (doc) {
-         return res.send('การยืนยันไม่สำเร็จ มีข้อมูููููลในระบบแล้ว')
+         return res.send('การยืนยันไม่สำเร็จ อีเมลของท่านถูกใช้ไปแล้ว')
       }
 
       const newUser = new User({ email, username, password })
@@ -76,6 +77,44 @@ router.get('/api/user/register/:token', (req, res) => {
          }
          return res.send('การยืนยันสำเร็จ')
       })
+   })
+})
+
+router.post('/api/user/forgetpass', (req, res) => {
+   const { email } = req.body
+   User.findOne({ email }).exec((err, doc) => {
+      if (doc) {
+         nodemailer.createTestAccount((err, account) => {
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+               service: 'gmail',
+               auth: {
+                  user: 'mernstack.isr@gmail.com',
+                  pass: 'isr605222'
+               }
+            })
+
+            let mailOptions = {
+               from: '<mernstack-isr@no-reply.com>',
+               to: req.body.email,
+               subject: 'Forget Password',
+               text: `Email : ${doc.email} , Password : ${doc.password}`,
+               html: `<p><b>Email : ${doc.email}</b></p><p><b>Password : ${
+                  doc.password
+               }</b></p>`
+            }
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (err, info) => {
+               if (err) {
+                  return res.json({ msg: 'มีบางอย่างผิดผลาด', err })
+               }
+               res.json({ msg: 'Success', info })
+            })
+         })
+      } else {
+         res.json({ msg: 'ไม่พบอีเมลของท่านในระบบ' })
+      }
    })
 })
 

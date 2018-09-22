@@ -1,8 +1,1 @@
-{
-   "vim.insertModeKeyBindings": [
-      {
-         "before": ["space", "space"],
-         "after": ["<Esc>"]
-      }
-   ]
-}
+{}

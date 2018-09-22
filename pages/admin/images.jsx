@@ -23,9 +23,6 @@ class AdminImages extends Component {
    // method
    componentDidMount = () => {
       this.loadImages()
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    loadImages = () => {
@@ -34,6 +31,9 @@ class AdminImages extends Component {
             images: res.data.res
          })
       })
+      setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    uploadImage = e => {

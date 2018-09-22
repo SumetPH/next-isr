@@ -19,9 +19,6 @@ export class user extends Component {
    // method
    componentDidMount = () => {
       this.loadUsers()
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
    }
 
    loadUsers = () => {
@@ -29,6 +26,9 @@ export class user extends Component {
          console.log(res.data)
          this.setState({ users: res.data.doc })
       })
+      setTimeout(() => {
+         this.setState({ loadPage: true })
+      }, 1000)
    }
 
    deleteUser = id => {
