@@ -4,6 +4,8 @@ import App, { Container } from 'next/app'
 import withRedux from 'next-redux-wrapper'
 import { initStore, loginAdmin, loginUser } from '../redux/store'
 import { ToastContainer } from 'react-toastify'
+import withNProgress from 'next-nprogress'
+import NProgressStyles from 'next-nprogress/styles'
 
 export default withRedux(initStore)(
    class MyApp extends App {
@@ -32,6 +34,7 @@ export default withRedux(initStore)(
             <Container>
                <Provider store={store}>
                   <div>
+                     <NProgressStyles color="#fdcb6e" spinner={false} />
                      <ToastContainer autoClose={2000} position="bottom-left" />
                      <Component {...pageProps} />
                   </div>

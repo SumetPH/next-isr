@@ -12,7 +12,9 @@ import NoAccess from '../../components/noaccess/NoAccess'
 export class setting extends Component {
    // state
    state = {
-      loadPage: false
+      loadPage: false,
+      statusBtnPass1: true,
+      statusBtnPass2: true
    }
 
    // method
@@ -62,6 +64,24 @@ export class setting extends Component {
       })
    }
 
+   checkPassword1 = e => {
+      e.preventDefault()
+      if (this.refs.oldPassword1.value === this.refs.oldPassword11.value) {
+         this.setState({ statusBtnPass1: false })
+      } else {
+         this.setState({ statusBtnPass1: true })
+      }
+   }
+
+   checkPassword2 = e => {
+      e.preventDefault()
+      if (this.refs.oldPassword2.value === this.refs.oldPassword22.value) {
+         this.setState({ statusBtnPass2: false })
+      } else {
+         this.setState({ statusBtnPass2: true })
+      }
+   }
+
    // render
    render() {
       if (!this.state.loadPage) {
@@ -102,15 +122,25 @@ export class setting extends Component {
                         <div className="column">
                            <small>รหัสผ่านปัจจุบัน</small>
                            <input
-                              type="text"
+                              type="password"
                               className="input"
                               ref="oldPassword1"
+                              onChange={this.checkPassword1}
                               placeholder="รหัสผ่านปัจจุบัน"
+                           />
+                           <input
+                              style={{ marginTop: '5px' }}
+                              onChange={this.checkPassword1}
+                              type="password"
+                              className="input"
+                              ref="oldPassword11"
+                              placeholder="รหัสผ่านปัจจุบันอีกครัง"
                            />
                         </div>
                         <div className="column">
                            <button
                               className="button is-primary"
+                              disabled={this.state.statusBtnPass1}
                               onClick={this.changeUsername}>
                               บันทึก
                            </button>
@@ -136,15 +166,25 @@ export class setting extends Component {
                         <div className="column">
                            <small>รหัสผ่านปัจจุบัน</small>
                            <input
-                              type="text"
+                              type="password"
+                              onChange={this.checkPassword2}
                               className="input"
                               ref="oldPassword2"
                               placeholder="รหัสผ่านปัจจุบัน"
+                           />
+                           <input
+                              style={{ marginTop: '5px' }}
+                              onChange={this.checkPassword2}
+                              type="password"
+                              className="input"
+                              ref="oldPassword22"
+                              placeholder="รหัสผ่านปัจจุบันอีกครัง"
                            />
                         </div>
                         <div className="column">
                            <button
                               className="button is-warning"
+                              disabled={this.state.statusBtnPass2}
                               onClick={this.changePassword}>
                               บันทึก
                            </button>
