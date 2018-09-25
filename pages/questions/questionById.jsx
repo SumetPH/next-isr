@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from '../../routes'
-import Router from 'next/router'
+import { Link, Router } from '../../routes'
 import axios from 'axios'
 import classNames from 'classnames'
 
@@ -46,7 +45,7 @@ class Question extends Component {
          data: { questionId }
       }).then(res => {
          if (res.data.msg === 'Error' || res.data.res === null) {
-            return Router.push('/questions')
+            Router.pushRoute('/questions')
          }
          this.setState({ question: res.data.question })
       })
