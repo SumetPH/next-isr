@@ -26,10 +26,10 @@ export class Navbar extends Component {
       })
       if (path === '/branch/is') {
          this.setState({ is: true })
-      } else if (path === '/branch/instructor') {
-         this.setState({ instructor: true })
       } else if (path === '/branch/lesson') {
          this.setState({ lesson: true })
+      } else if (path === '/branch/instructor') {
+         this.setState({ instructor: true })
       } else if (path === '/branch/images') {
          this.setState({ images: true })
       }
@@ -53,17 +53,6 @@ export class Navbar extends Component {
                      </span>
                   </a>
                </Link>
-               <Link route="/branch/instructor">
-                  <a
-                     className={classnames({
-                        'n-link': true,
-                        'n-link-active': this.state.instructor
-                     })}>
-                     <span className="icon">
-                        <i className="fas fa-chalkboard-teacher" />
-                     </span>
-                  </a>
-               </Link>
                <Link route="/branch/lesson">
                   <a
                      className={classnames({
@@ -72,6 +61,17 @@ export class Navbar extends Component {
                      })}>
                      <span className="icon">
                         <i className="fas fa-book" />
+                     </span>
+                  </a>
+               </Link>
+               <Link route="/branch/instructor">
+                  <a
+                     className={classnames({
+                        'n-link': true,
+                        'n-link-active': this.state.instructor
+                     })}>
+                     <span className="icon">
+                        <i className="fas fa-chalkboard-teacher" />
                      </span>
                   </a>
                </Link>

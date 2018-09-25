@@ -23,7 +23,7 @@ export class instructor extends Component {
                <div className="section-back">
                   <div className="section-front">
                      <div
-                        className="animated fadeInUp slow"
+                        className="animated fadeInLeft slow"
                         style={{ margin: '5rem' }}>
                         <h3 className="title is-3 has-text-light">
                            Instructor

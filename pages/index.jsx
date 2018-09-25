@@ -37,7 +37,7 @@ class Index extends Component {
                         ด้วยเทคนิคสมัยใหม่ (Mern Stack)
                      </p>
                      <p className="subtitle is-5 animated zoomIn delay-1s">
-                        Infomation System.
+                        Information System.
                      </p>
                   </div>
                </div>
