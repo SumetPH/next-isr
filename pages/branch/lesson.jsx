@@ -20,8 +20,8 @@ class Lesson extends Component {
          <div>
             <NavbarSide />
             {this.state.loadPage ? (
-               <div className="s">
-                  <div className="container">
+               <div className="section-back">
+                  <div className="section-front">
                      <div
                         className="column is-3 animated bounceIn slow"
                         style={{ margin: '5rem' }}>

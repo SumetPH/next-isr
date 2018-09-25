@@ -23,7 +23,8 @@ class Question extends Component {
       question: [],
       loadPage: false,
       isLoading: false,
-      isDelete: {}
+      isDelete: {},
+      btnQuestionDel: false
    }
 
    // method
@@ -95,35 +96,51 @@ class Question extends Component {
       })
    }
 
+   questionDel = questionId => {
+      this.setState({ btnQuestionDel: true })
+      axios({
+         url: '/api/question/delete',
+         method: 'delete',
+         data: { questionId }
+      }).then(res => {
+         console.log(res.data)
+         if (res.data.msg === 'Success') {
+            Router.push('/questions')
+         }
+
+         this.setState({ btnQuestionDel: false })
+      })
+   }
+
    // view
    answersView = (answers = []) => {
       const answersList = answers.map(item => {
+         const { _id, username, body, created } = item
+         console.log(username, this.props.username)
          return (
-            <div key={item._id}>
-               <p className="animated fadeIn">{item.body}</p>
+            <div key={_id}>
+               <p className="animated fadeIn">{body}</p>
                <div
                   style={{
                      display: 'flex',
                      justifyContent: 'flex-end'
                   }}>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
+                     <small className="animated fadeIn">โดย : {username}</small>
                      <small className="animated fadeIn">
-                        โดย : {item.username}
+                        โพสต์เมื่อ :{new Date(created).toLocaleDateString()}
                      </small>
-                     <small className="animated fadeIn">
-                        โพสต์เมื่อ :
-                        {new Date(item.created).toLocaleDateString()}
-                     </small>
-                     {this.props.isAuth === false ? null : (
+                     {this.props.isAuth === true ||
+                     this.props.username === username ? (
                         <button
                            className={classNames({
                               'button is-danger is-small': true,
-                              'is-loading': this.state.isDelete[item._id]
+                              'is-loading': this.state.isDelete[_id]
                            })}
-                           onClick={() => this.deleteComment(item._id)}>
+                           onClick={() => this.deleteComment(_id)}>
                            Del
                         </button>
-                     )}
+                     ) : null}
                   </div>
                </div>
                <hr />
@@ -142,9 +159,9 @@ class Question extends Component {
 
    // render
    render() {
-      const { isUser } = this.props
-      const { isLoading } = this.state
-      const { title, body, created, answers = [] } = this.state.question
+      const { isUser, isAuth, username } = this.props
+      const { isLoading, btnQuestionDel } = this.state
+      const { _id, title, body, created, answers = [] } = this.state.question
 
       if (this.state.loadPage === false) {
          return <Loading bg="white" color="black" />
@@ -181,10 +198,29 @@ class Question extends Component {
                      <p className="animated fadeIn">{body}</p>
                      <div
                         className="animated fadeIn"
-                        style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <small>
-                           โพสต์เมื่อ : {new Date(created).toLocaleDateString()}
-                        </small>
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'flex-end'
+                        }}>
+                        <div
+                           style={{ display: 'flex', flexDirection: 'column' }}>
+                           <small>
+                              โพสต์เมื่อ :{' '}
+                              {new Date(created).toLocaleDateString()}
+                           </small>
+
+                           {isAuth === true ||
+                           username === this.state.question.username ? (
+                              <button
+                                 className={classNames({
+                                    'button is-danger is-small': true,
+                                    'is-loading': btnQuestionDel
+                                 })}
+                                 onClick={() => this.questionDel(_id)}>
+                                 Del.
+                              </button>
+                           ) : null}
+                        </div>
                      </div>
                   </div>
                </div>

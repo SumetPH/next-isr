@@ -49,7 +49,7 @@ export class Navbar extends Component {
                         'n-link-active': this.state.is
                      })}>
                      <span className="icon">
-                        <i className="fas fa-code-branch" />
+                        <i className="far fa-circle" />
                      </span>
                   </a>
                </Link>
