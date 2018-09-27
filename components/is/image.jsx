@@ -34,7 +34,7 @@ export class Image extends Component {
                   alignItems: 'flex-end'
                }}>
                <img src="/static/icons/picture.png" alt="" />
-               <h3 className="title is-3 has-text-light">Images</h3>
+               <h3 className="title is-3 has-text-light">รูปภาพ</h3>
             </div>
             <div className="column">
                <div className="columns is-multiline">{imgList}</div>

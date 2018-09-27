@@ -24,7 +24,7 @@ export class i360 extends Component {
                         padding: '5px'
                      }}>
                      <img src="/static/icons/360-degrees.png" alt="" />
-                     <h3 className="title is-4 has-text-light">360 Viewer</h3>
+                     <h3 className="title is-4 has-text-light">360 Preview</h3>
                   </div>
                   <div className="box animated fadeIn slow">
                      <Iframe

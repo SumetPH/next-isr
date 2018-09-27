@@ -17,7 +17,7 @@ export class lesson extends Component {
                      alignItems: 'flex-end'
                   }}>
                   <img src="/static/icons/book.png" alt="" />
-                  <h3 className="title is-3 has-text-light">Lesson</h3>
+                  <h3 className="title is-3 has-text-light">หลักสูตร</h3>
                </div>
             </div>
             <div className="columns">
