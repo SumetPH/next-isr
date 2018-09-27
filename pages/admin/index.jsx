@@ -74,10 +74,21 @@ class Admin extends Component {
                                     <span className="icon m-5px">
                                        <i className="fas fa-chalkboard-teacher" />
                                     </span>
+                                    เพิ่ม / ลบ หลักสูตร
+                                 </a>
+                              </Link>
+                           </p>
+                           <p style={{ margin: '1rem' }}>
+                              <Link route="/admin/instructor">
+                                 <a>
+                                    <span className="icon m-5px">
+                                       <i className="fas fa-chalkboard-teacher" />
+                                    </span>
                                     เพิ่ม / ลบ อาจารย์
                                  </a>
                               </Link>
                            </p>
+
                            <p style={{ margin: '1rem' }}>
                               <Link route="/admin/images">
                                  <a>
@@ -85,6 +96,17 @@ class Admin extends Component {
                                        <i className="fas fa-images" />
                                     </span>
                                     เพิ่ม / ลบ รูปภาพ
+                                 </a>
+                              </Link>
+                           </p>
+
+                           <p style={{ margin: '1rem' }}>
+                              <Link route="/admin/images">
+                                 <a>
+                                    <span className="icon m-5px">
+                                       <i className="fas fa-images" />
+                                    </span>
+                                    เพิ่ม / ลบ 360
                                  </a>
                               </Link>
                            </p>
