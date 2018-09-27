@@ -67,7 +67,7 @@ export class Navbar extends Component {
                   <Link route="/">
                      <a className="navbar-item">หน้าแรก</a>
                   </Link>
-                  <Link route="/branch/is">
+                  <Link route="/is">
                      <a
                         className={classnames({
                            'navbar-item': true,
@@ -76,14 +76,14 @@ export class Navbar extends Component {
                         โปรแกรมวิชา
                      </a>
                   </Link>
-                  <Link route="/questions">
+                  {/* <Link route="/questions">
                      <a className="navbar-item">กระทู้ถามตอบ</a>
-                  </Link>
+                  </Link> */}
                   <Link route={isAuth ? '/admin' : '/admin/login'}>
                      <a className="navbar-item">สำหรับผู้ดูแล</a>
                   </Link>
                   <span className="navbar-item">
-                     {isUser ? (
+                     {/* {isUser ? (
                         <button
                            className="button is-warning is-rounded"
                            onClick={this.logoutUser}>
@@ -105,7 +105,7 @@ export class Navbar extends Component {
                               </span>
                            </a>
                         </Link>
-                     )}
+                     )} */}
                   </span>
                </div>
                {/* --end-- */}

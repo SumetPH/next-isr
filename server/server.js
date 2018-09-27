@@ -50,6 +50,10 @@ app.prepare().then(() => {
       res.render('panorama', { img: req.params.id })
    })
 
+   server.get('/panorama/:id/:height', (req, res) => {
+      res.render('google', { id: req.params.id, height: req.params.height })
+   })
+
    server.use(handle).listen(port, err => {
       if (err) throw err
       console.log(`> Ready on http://localhost:${port}`)

@@ -6,12 +6,12 @@ const Answer = require('../../models/Answer')
 router.get('/api/question/all', (req, res) => {
    Question.find()
       .populate('answers')
-      .exec((err, questions) =>
+      .exec((err, questions) => {
          res.json({
             msg: 'Success',
             questions
          })
-      )
+      })
 })
 
 // get question by id

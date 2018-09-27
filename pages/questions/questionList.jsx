@@ -25,10 +25,6 @@ class Questions extends Component {
       this.loadQuestions()
    }
 
-   componentWillUnmount = () => {
-      clearInterval(this.interval)
-   }
-
    loadQuestions = () => {
       axios.get('/api/question/all').then(res => {
          this.setState({
@@ -36,7 +32,7 @@ class Questions extends Component {
          })
       })
 
-      this.interval = setTimeout(() => {
+      setTimeout(() => {
          this.setState({ loadPage: true })
       }, 1000)
    }
@@ -65,6 +61,7 @@ class Questions extends Component {
 
    // view
    questionsList = questions => {
+      if (typeof questions === 'undefined') return null
       return questions.map(item => {
          return (
             <Fade key={item._id}>
@@ -109,7 +106,8 @@ class Questions extends Component {
                      <div className="column" style={{ paddingTop: '7rem' }}>
                         <div
                            className="box has-background-info has-text-white"
-                           style={{ border: '2px white solid' }}>
+                           // style={{ border: '2px white solid' }}
+                        >
                            <h4 className="title is-4 has-text-white">
                               <span className="icon m-5px">
                                  <i className="fas fa-question" />

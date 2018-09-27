@@ -58,7 +58,7 @@ class Admin extends Component {
                         <div className="box ">
                            <b>Admin</b>
                            <hr />
-                           <p style={{ margin: '1rem' }}>
+                           {/* <p style={{ margin: '1rem' }}>
                               <Link route="/admin/questions">
                                  <a>
                                     <span className="icon m-5px">
@@ -67,7 +67,7 @@ class Admin extends Component {
                                     ลบกระทู้คำถาม
                                  </a>
                               </Link>
-                           </p>
+                           </p> */}
                            <p style={{ margin: '1rem' }}>
                               <Link route="/admin/instructor">
                                  <a>
@@ -88,7 +88,7 @@ class Admin extends Component {
                                  </a>
                               </Link>
                            </p>
-                           <p style={{ margin: '1rem' }}>
+                           {/* <p style={{ margin: '1rem' }}>
                               <Link route="/admin/user">
                                  <a>
                                     <span className="icon m-5px">
@@ -97,7 +97,7 @@ class Admin extends Component {
                                     ลบสมาชิก
                                  </a>
                               </Link>
-                           </p>
+                           </p> */}
                            <p style={{ margin: '1rem' }}>
                               <Link route="/admin/setting">
                                  <a>

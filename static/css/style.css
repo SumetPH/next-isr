@@ -57,8 +57,8 @@ html {
 }
 
 .section-front {
-   padding-left: 70px;
-   padding-right: 10px;
+   /* padding-left: 70px; */
+   /* padding-right: 10px; */
    color: white;
    background-color: #363636;
 }
