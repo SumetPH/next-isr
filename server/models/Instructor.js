@@ -6,6 +6,7 @@ const InstructorSchema = new Schema({
       type: String,
       required: true
    },
+   sex: String,
    position: String,
    email: String,
    facebook: String

@@ -4,7 +4,7 @@ import Router from 'next/router'
 
 // redux
 import { connect } from 'react-redux'
-import { logoutAdmin } from '../../redux/store'
+import { checkAdmin } from '../../redux/store'
 
 // component
 import Loading from '../../components/loading/Loading'
@@ -26,22 +26,22 @@ class Admin extends Component {
 
    logoutAdmin = async () => {
       await Router.push('/')
-      await this.props.dispatch(logoutAdmin())
+      await this.props.dispatch(checkAdmin('logout'))
    }
 
    // render
    render() {
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+      // if (!this.state.loadPage) {
+      //    return <Loading />
+      // }
 
-      if (!this.props.isAuth) {
+      if (!this.props.isAdmin) {
          return <NoAccess />
       }
 
       return (
          <div>
-            <Navbar color="is-danger" />
+            <Navbar color="is-primary" />
             <div className="hero  ">
                <div className="hero-body">
                   <div className="container">

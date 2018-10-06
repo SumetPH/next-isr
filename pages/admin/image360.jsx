@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Zoom from 'react-reveal/Zoom'
 import File64 from 'react-file-base64'
+import { toast } from 'react-toastify'
 
 // redux
 import { connect } from 'react-redux'
@@ -30,12 +31,13 @@ class Image360 extends Component {
       axios.get('/api/image360/all').then(res => {
          console.log(res.data)
          this.setState({
-            images: res.data.res
+            images: res.data.res,
+            loadPage: true
          })
       })
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
+      // setTimeout(() => {
+      //    this.setState({ loadPage: true })
+      // }, 1000)
    }
 
    uploadImage = e => {
@@ -49,9 +51,14 @@ class Image360 extends Component {
          })
          .then(res => {
             console.log(res.data)
-            this.refs.form.reset()
-            this.setState({ loadingUpload: '', file: '' })
-            this.loadImages()
+            if (res.data.msg === 'Error') {
+               this.setState({ loadingUpload: '' })
+               toast.error('กรุณากรอกข้อมูลให้ครบถ้วน')
+            } else {
+               this.refs.form.reset()
+               this.setState({ loadingUpload: '', file: '' })
+               this.loadImages()
+            }
          })
    }
 
@@ -71,19 +78,27 @@ class Image360 extends Component {
 
    //view
    imagesList = images => {
-      return images.map((item, i) => {
+      if (!this.state.loadPage) {
          return (
-            <Zoom key={i}>
+            <div style={{ paddingTop: '5rem' }}>
+               <Loading />
+            </div>
+         )
+      }
+
+      return images.map(image => {
+         return (
+            <Zoom key={image._id}>
                <div className="column is-4">
                   <div className="box">
-                     <img src={`${item.src}`} alt="" />
+                     <img src={`${image.src}`} alt="" />
                      <br />
-                     {item.filename}
+                     {image.filename}
                      <br />
                      <button
-                        onClick={() => this.deteteImage(item._id)}
+                        onClick={() => this.deteteImage(image._id)}
                         className={`button is-danger is-small ${
-                           this.state.loadingDel[item._id]
+                           this.state.loadingDel[image._id]
                         }`}>
                         Del.
                      </button>
@@ -96,18 +111,18 @@ class Image360 extends Component {
 
    // render
    render() {
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+      // if (!this.state.loadPage) {
+      //    return <Loading />
+      // }
 
-      if (!this.props.isAuth) {
+      if (!this.props.isAdmin) {
          return <NoAccess />
       }
 
       const { name = '......' } = this.state.file
       return (
          <div>
-            <Navbar color="is-primary" />
+            <Navbar logo="black" />
             <div className="container">
                <div className="column" style={{ marginTop: '1rem' }}>
                   <h5 className="title is-5">เพิ่ม / ลบ รูปภาพ 360 องศา</h5>

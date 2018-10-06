@@ -36,7 +36,11 @@ export class instructor extends Component {
                         display: 'flex',
                         color: 'white'
                      }}>
-                     <img src="/static/icons/girl.png" alt="" />
+                     {instructor.sex === 'ชาย' ? (
+                        <img src="/static/icons/boy.png" alt="" />
+                     ) : (
+                        <img src="/static/icons/girl.png" alt="" />
+                     )}
                      <div style={{ paddingLeft: '1rem' }}>
                         <p>{instructor.name}</p>
                         <p>ตำแหน่ง : {instructor.position}</p>

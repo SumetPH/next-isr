@@ -3,91 +3,43 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 
 const InitialState = {
-   isAuth: false,
-   isUser: false,
-   username: '',
-   logo: '/static/icons/isr4b.png'
+   isAdmin: false
 }
 
 export const actionTypes = {
-   admin: 'admin',
-   user: 'user',
-   logo: 'logo'
+   isAdmin: 'isAdmin'
 }
 
 // REDUCERS
 export const reducer = (state = InitialState, action) => {
    switch (action.type) {
-      case actionTypes.admin:
+      case actionTypes.isAdmin:
          return {
             ...state,
-            isAuth: action.isAuth
+            isAdmin: action.isAdmin
          }
-      case actionTypes.user:
-         return {
-            ...state,
-            isUser: action.isUser,
-            username: action.username
-         }
-      case actionTypes.logo:
-         return {
-            ...state,
-            logo: action.logo
-         }
-
       default:
          return state
    }
 }
 
 // ACTIONS
-export const loginAdmin = () => dispatch => {
-   localStorage.setItem('isAuth', true)
-   dispatch({
-      type: actionTypes.admin,
-      isAuth: true
-   })
-}
+export const checkAdmin = status => dispatch => {
+   if (status === 'login') {
+      localStorage.setItem('isAdmin', true)
+      dispatch({
+         type: actionTypes.isAdmin,
+         isAdmin: true
+      })
+   }
 
-export const logoutAdmin = () => dispatch => {
-   localStorage.removeItem('isAuth')
-   dispatch({
-      type: actionTypes.admin,
-      isAuth: false
-   })
-}
-
-export const logoBlack = () => dispatch => {
-   dispatch({
-      type: actionTypes.logo,
-      logo: '/static/icons/isr4b-black.png'
-   })
-}
-
-export const logoWhite = () => dispatch => {
-   dispatch({
-      type: actionTypes.logo,
-      logo: '/static/icons/isr4b.png'
-   })
-}
-
-export const loginUser = ({ username }) => dispatch => {
-   localStorage.setItem('isUser', true)
-   localStorage.setItem('username', username)
-   dispatch({
-      type: actionTypes.user,
-      isUser: true,
-      username: username
-   })
-}
-
-export const logoutUser = () => dispatch => {
-   localStorage.removeItem('isUser')
-   localStorage.removeItem('username')
-   dispatch({
-      type: actionTypes.user,
-      isAuth: false
-   })
+   if (status === 'logout') {
+      localStorage.removeItem('isAdmin')
+      dispatch({
+         type: actionTypes.isAdmin,
+         isAdmin: false
+      })
+   }
 }
 
 export const initStore = initialState => {

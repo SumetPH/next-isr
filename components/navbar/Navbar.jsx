@@ -5,13 +5,14 @@ import classnames from 'classnames'
 
 // redux
 import { connect } from 'react-redux'
-import { logoutUser } from '../../redux/store'
 
 export class Navbar extends Component {
    // state
    state = {
       isActive: false,
-      animate: false
+      animate: false,
+      logoWhite: '/static/icons/isr4b.png',
+      logoBlack: '/static/icons/isr4b-black.png'
    }
 
    // method
@@ -25,14 +26,9 @@ export class Navbar extends Component {
       clearInterval(this.interval)
    }
 
-   logoutUser = async () => {
-      await Router.push('/')
-      await this.props.dispatch(logoutUser())
-   }
-
    render() {
-      const { isAuth, isUser, color = 'is-transparent', logo } = this.props
-      const { isActive, animate } = this.state
+      const { isAdmin, color = 'is-transparent', logo = 'white' } = this.props
+      const { isActive, animate, logoWhite, logoBlack } = this.state
       return (
          <nav className={`navbar ${color}`}>
             <div
@@ -41,7 +37,7 @@ export class Navbar extends Component {
                   'is-active': this.state.isActive
                })}>
                <span className="navbar-item">
-                  <img src={logo} alt="" />
+                  <img src={logo === 'black' ? logoBlack : logoWhite} alt="" />
                </span>
                <span
                   className="navbar-burger burger"
@@ -76,37 +72,10 @@ export class Navbar extends Component {
                         ข้อมูลโปรแกรมวิชา
                      </a>
                   </Link>
-                  {/* <Link route="/questions">
-                     <a className="navbar-item">กระทู้ถามตอบ</a>
-                  </Link> */}
-                  <Link route={isAuth ? '/admin' : '/admin/login'}>
+
+                  <Link route={isAdmin ? '/admin' : '/admin/login'}>
                      <a className="navbar-item">สำหรับผู้ดูแล</a>
                   </Link>
-                  <span className="navbar-item">
-                     {/* {isUser ? (
-                        <button
-                           className="button is-warning is-rounded"
-                           onClick={this.logoutUser}>
-                           <span className="icon">
-                              <i className="fas fa-key" />
-                           </span>
-                           <span>
-                              <b>ออกจากระบบ</b>
-                           </span>
-                        </button>
-                     ) : (
-                        <Link route="/user/login">
-                           <a className="button is-primary is-rounded">
-                              <span className="icon">
-                                 <i className="fas fa-key" />
-                              </span>
-                              <span>
-                                 <b>เข้าสู่ระบบ</b>
-                              </span>
-                           </a>
-                        </Link>
-                     )} */}
-                  </span>
                </div>
                {/* --end-- */}
             </div>

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 // redux
 import { connect } from 'react-redux'
-import { loginAdmin } from '../../redux/store'
+import { checkAdmin } from '../../redux/store'
 
 class Login extends Component {
    // method
@@ -21,7 +21,7 @@ class Login extends Component {
       }).then(res => {
          console.log(res.data)
          if (res.data.msg === 'Success') {
-            this.props.dispatch(loginAdmin())
+            this.props.dispatch(checkAdmin('login'))
             Router.push('/admin')
             toast.success('เข้าสู่ระบบสำเร็จ')
          } else {

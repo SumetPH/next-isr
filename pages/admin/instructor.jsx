@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 // components
 import Loading from '../../components/loading/Loading'
 import NoAccess from '../../components/noaccess/NoAccess'
+import Navbar from '../../components/navbar/Navbar'
 
 export class Instructor extends Component {
    state = {
@@ -41,6 +42,7 @@ export class Instructor extends Component {
          url: '/api/instructor/post',
          data: {
             name: this.refs.name.value,
+            sex: this.refs.sex.value,
             position: this.refs.position.value,
             email: this.refs.email.value,
             facebook: this.refs.facebook.value
@@ -76,6 +78,9 @@ export class Instructor extends Component {
          return (
             <tr key={instructor._id}>
                <Fade>
+                  <td>{instructor.sex}</td>
+               </Fade>
+               <Fade>
                   <td>{instructor.name}</td>
                </Fade>
                <Fade>
@@ -100,89 +105,108 @@ export class Instructor extends Component {
          )
       })
 
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+      // if (!this.state.loadPage) {
+      //    return <Loading />
+      // }
 
-      if (!this.props.isAuth) {
+      if (!this.props.isAdmin) {
          return <NoAccess />
       }
 
       return (
-         <div className="container">
-            {/* add professor */}
-            <div className="column">
-               <div className="box">
-                  <h6 className="subtitle is-6">เพิ่มอาจารย์</h6>
-                  <form ref="form">
-                     <div className="column">
-                        <div className="control">
-                           <input
-                              className="input is-rounded"
-                              type="text"
-                              ref="name"
-                              placeholder="ชื่อ-สกุล"
-                           />
+         <div>
+            <Navbar logo="black" />
+            <div className="container">
+               {/* add professor */}
+               <div className="column">
+                  <div className="box">
+                     <h6 className="subtitle is-6">เพิ่มอาจารย์</h6>
+                     <form ref="form">
+                        <div className="column">
+                           <div className="columns">
+                              <div className="column is-10">
+                                 <input
+                                    className="input is-rounded"
+                                    type="text"
+                                    ref="name"
+                                    placeholder="ชื่อ-สกุล"
+                                 />
+                              </div>
+                              <div
+                                 className="column is-2"
+                                 style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                 }}>
+                                 <div className="select is-rounded">
+                                    <select ref="sex">
+                                       <option>ชาย</option>
+                                       <option>หญิง</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                     <div className="column">
-                        <div className="control">
-                           <input
-                              className="input is-rounded"
-                              type="text"
-                              ref="position"
-                              placeholder="ตำแหน่ง"
-                           />
+                        <div className="column">
+                           <div className="control">
+                              <input
+                                 className="input is-rounded"
+                                 type="text"
+                                 ref="position"
+                                 placeholder="ตำแหน่ง"
+                              />
+                           </div>
                         </div>
-                     </div>
-                     <div className="column">
-                        <div className="control">
-                           <input
-                              className="input is-rounded"
-                              type="text"
-                              ref="email"
-                              placeholder="Email"
-                           />
+                        <div className="column">
+                           <div className="control">
+                              <input
+                                 className="input is-rounded"
+                                 type="text"
+                                 ref="email"
+                                 placeholder="Email"
+                              />
+                           </div>
                         </div>
-                     </div>
-                     <div className="column">
-                        <div className="control">
-                           <input
-                              className="input is-rounded"
-                              type="text"
-                              ref="facebook"
-                              placeholder="Facebook"
-                           />
+                        <div className="column">
+                           <div className="control">
+                              <input
+                                 className="input is-rounded"
+                                 type="text"
+                                 ref="facebook"
+                                 placeholder="Facebook"
+                              />
+                           </div>
                         </div>
-                     </div>
-                     <div className="column is-1">
-                        <button
-                           className={classnames({
-                              'button is-info': true,
-                              'is-loading': this.state.loadingAdd
-                           })}
-                           onClick={this.addInstructor}>
-                           เพิ่ม
-                        </button>
-                     </div>
-                  </form>
+                        <div className="column is-1">
+                           <button
+                              className={classnames({
+                                 'button is-info': true,
+                                 'is-loading': this.state.loadingAdd
+                              })}
+                              onClick={this.addInstructor}>
+                              เพิ่ม
+                           </button>
+                        </div>
+                     </form>
+                  </div>
                </div>
-            </div>
-            {/* --- */}
+               {/* --- */}
 
-            <div className="column">
-               <table className="table is-striped is-fullwidth">
-                  <thead>
-                     <tr>
-                        <th>ชื่อ-สกุล</th>
-                        <th>ตำแหน่ง</th>
-                        <th>Email</th>
-                        <th>Facebook</th>
-                        <th>ลบ</th>
-                     </tr>
-                  </thead>
-                  <tbody>{listInstructor}</tbody>
-               </table>
+               <div className="column">
+                  <table className="table is-striped is-fullwidth">
+                     <thead>
+                        <tr>
+                           <th>เพศ</th>
+                           <th>ชื่อ-สกุล</th>
+                           <th>ตำแหน่ง</th>
+                           <th>Email</th>
+                           <th>Facebook</th>
+                           <th>ลบ</th>
+                        </tr>
+                     </thead>
+                     <tbody>{listInstructor}</tbody>
+                  </table>
+               </div>
             </div>
          </div>
       )

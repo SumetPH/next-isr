@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 // component
 import Loading from '../../components/loading/Loading'
 import NoAccess from '../../components/noaccess/NoAccess'
+import Navbar from '../../components/navbar/Navbar'
 
 export class setting extends Component {
    // state
@@ -84,112 +85,115 @@ export class setting extends Component {
 
    // render
    render() {
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+      // if (!this.state.loadPage) {
+      //    return <Loading />
+      // }
 
-      if (!this.props.isAuth) {
+      if (!this.props.isAdmin) {
          return <NoAccess />
       }
 
       return (
-         <div className="container">
-            <div className="columns">
-               <div className="column" style={{ marginTop: '1rem' }}>
-                  <div className="box">
-                     <h5 className="title is-5 has-text-centered">
-                        ตั้งค่าระบบ
-                     </h5>
+         <div>
+            <Navbar logo="black" />
+            <div className="container">
+               <div className="columns">
+                  <div className="column" style={{ marginTop: '1rem' }}>
+                     <div className="box">
+                        <h5 className="title is-5 has-text-centered">
+                           ตั้งค่าระบบ
+                        </h5>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div className="columns">
-               <div className="column">
-                  <div className="box">
-                     <h6 className="title is-6">
-                        เปลี่ยนชื่อผู้ใช้ (Username Admin)
-                     </h6>
-                     <form ref="changeUsername">
-                        <div className="column">
-                           <small>ชื่อผู้ใช้ใหม่</small>
-                           <input
-                              type="text"
-                              className="input"
-                              ref="newUsername"
-                              placeholder="ชื่อผู้ใช้ใหม่"
-                           />
-                        </div>
-                        <div className="column">
-                           <small>รหัสผ่านปัจจุบัน</small>
-                           <input
-                              type="password"
-                              className="input"
-                              ref="oldPassword1"
-                              onChange={this.checkPassword1}
-                              placeholder="รหัสผ่านปัจจุบัน"
-                           />
-                           <input
-                              style={{ marginTop: '5px' }}
-                              onChange={this.checkPassword1}
-                              type="password"
-                              className="input"
-                              ref="oldPassword11"
-                              placeholder="รหัสผ่านปัจจุบันอีกครัง"
-                           />
-                        </div>
-                        <div className="column">
-                           <button
-                              className="button is-primary"
-                              disabled={this.state.statusBtnPass1}
-                              onClick={this.changeUsername}>
-                              บันทึก
-                           </button>
-                        </div>
-                     </form>
+               <div className="columns">
+                  <div className="column">
+                     <div className="box">
+                        <h6 className="title is-6">
+                           เปลี่ยนชื่อผู้ใช้ (Username Admin)
+                        </h6>
+                        <form ref="changeUsername">
+                           <div className="column">
+                              <small>ชื่อผู้ใช้ใหม่</small>
+                              <input
+                                 type="text"
+                                 className="input"
+                                 ref="newUsername"
+                                 placeholder="ชื่อผู้ใช้ใหม่"
+                              />
+                           </div>
+                           <div className="column">
+                              <small>รหัสผ่านปัจจุบัน</small>
+                              <input
+                                 type="password"
+                                 className="input"
+                                 ref="oldPassword1"
+                                 onChange={this.checkPassword1}
+                                 placeholder="รหัสผ่านปัจจุบัน"
+                              />
+                              <input
+                                 style={{ marginTop: '5px' }}
+                                 onChange={this.checkPassword1}
+                                 type="password"
+                                 className="input"
+                                 ref="oldPassword11"
+                                 placeholder="รหัสผ่านปัจจุบันอีกครัง"
+                              />
+                           </div>
+                           <div className="column">
+                              <button
+                                 className="button is-primary"
+                                 disabled={this.state.statusBtnPass1}
+                                 onClick={this.changeUsername}>
+                                 บันทึก
+                              </button>
+                           </div>
+                        </form>
+                     </div>
                   </div>
-               </div>
-               <div className="column">
-                  <div className="box">
-                     <h6 className="title is-6">
-                        เปลี่ยนรหัสผ่าน (Password Admin)
-                     </h6>
-                     <form ref="changePassword">
-                        <div className="column">
-                           <small>รหัสผ่านใหม่</small>
-                           <input
-                              type="text"
-                              className="input"
-                              ref="newPassword"
-                              placeholder="รหัสผ่านใหม่"
-                           />
-                        </div>
-                        <div className="column">
-                           <small>รหัสผ่านปัจจุบัน</small>
-                           <input
-                              type="password"
-                              onChange={this.checkPassword2}
-                              className="input"
-                              ref="oldPassword2"
-                              placeholder="รหัสผ่านปัจจุบัน"
-                           />
-                           <input
-                              style={{ marginTop: '5px' }}
-                              onChange={this.checkPassword2}
-                              type="password"
-                              className="input"
-                              ref="oldPassword22"
-                              placeholder="รหัสผ่านปัจจุบันอีกครัง"
-                           />
-                        </div>
-                        <div className="column">
-                           <button
-                              className="button is-warning"
-                              disabled={this.state.statusBtnPass2}
-                              onClick={this.changePassword}>
-                              บันทึก
-                           </button>
-                        </div>
-                     </form>
+                  <div className="column">
+                     <div className="box">
+                        <h6 className="title is-6">
+                           เปลี่ยนรหัสผ่าน (Password Admin)
+                        </h6>
+                        <form ref="changePassword">
+                           <div className="column">
+                              <small>รหัสผ่านใหม่</small>
+                              <input
+                                 type="text"
+                                 className="input"
+                                 ref="newPassword"
+                                 placeholder="รหัสผ่านใหม่"
+                              />
+                           </div>
+                           <div className="column">
+                              <small>รหัสผ่านปัจจุบัน</small>
+                              <input
+                                 type="password"
+                                 onChange={this.checkPassword2}
+                                 className="input"
+                                 ref="oldPassword2"
+                                 placeholder="รหัสผ่านปัจจุบัน"
+                              />
+                              <input
+                                 style={{ marginTop: '5px' }}
+                                 onChange={this.checkPassword2}
+                                 type="password"
+                                 className="input"
+                                 ref="oldPassword22"
+                                 placeholder="รหัสผ่านปัจจุบันอีกครัง"
+                              />
+                           </div>
+                           <div className="column">
+                              <button
+                                 className="button is-warning"
+                                 disabled={this.state.statusBtnPass2}
+                                 onClick={this.changePassword}>
+                                 บันทึก
+                              </button>
+                           </div>
+                        </form>
+                     </div>
                   </div>
                </div>
             </div>

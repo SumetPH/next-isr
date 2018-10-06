@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 // components
 import Loading from '../../components/loading/Loading'
 import NoAccess from '../../components/noaccess/NoAccess'
+import Navbar from '../../components/navbar/Navbar'
 
 class AdminImages extends Component {
    // state
@@ -29,12 +30,13 @@ class AdminImages extends Component {
       axios.get('/api/image/all').then(res => {
          console.log(res.data)
          this.setState({
-            images: res.data.res
+            images: res.data.res,
+            loadPage: true
          })
       })
-      setTimeout(() => {
-         this.setState({ loadPage: true })
-      }, 1000)
+      // setTimeout(() => {
+      //    this.setState({ loadPage: true })
+      // }, 1000)
    }
 
    uploadImage = e => {
@@ -65,6 +67,14 @@ class AdminImages extends Component {
 
    //view
    imagesList = images => {
+      if (!this.state.loadPage) {
+         return (
+            <div style={{ paddingTop: '5rem' }}>
+               <Loading />
+            </div>
+         )
+      }
+
       return images.map((item, i) => {
          return (
             <Zoom key={i}>
@@ -88,59 +98,64 @@ class AdminImages extends Component {
 
    // render
    render() {
-      if (!this.state.loadPage) {
-         return <Loading />
-      }
+      // if (!this.state.loadPage) {
+      //    return <Loading />
+      // }
 
-      if (!this.props.isAuth) {
+      if (!this.props.isAdmin) {
          return <NoAccess />
       }
 
       const { name = '......' } = this.state.file
       return (
-         <div className="container">
-            <div className="column" style={{ marginTop: '1rem' }}>
-               <h5 className="title is-5">เพิ่ม / ลบ รูปภาพ</h5>
-               <form ref="form">
-                  <div
-                     className="columns"
-                     style={{ margin: 40, justifyContent: 'center' }}>
+         <div>
+            <Navbar logo="black" />
+            <div className="container">
+               <div className="column" style={{ marginTop: '1rem' }}>
+                  <h5 className="title is-5">เพิ่ม / ลบ รูปภาพ</h5>
+                  <form ref="form">
                      <div
-                        className="file has-name"
-                        style={{ justifyContent: 'center' }}>
-                        <label className="file-label">
-                           <div style={{ display: 'none' }}>
-                              <File64
-                                 className="file-input"
-                                 onDone={file => this.setState({ file })}
-                              />
-                           </div>
-                           <span className="file-cta">
-                              <span className="file-icon">
-                                 <i className="fas fa-upload" />
+                        className="columns"
+                        style={{ margin: 40, justifyContent: 'center' }}>
+                        <div
+                           className="file has-name"
+                           style={{ justifyContent: 'center' }}>
+                           <label className="file-label">
+                              <div style={{ display: 'none' }}>
+                                 <File64
+                                    className="file-input"
+                                    onDone={file => this.setState({ file })}
+                                 />
+                              </div>
+                              <span className="file-cta">
+                                 <span className="file-icon">
+                                    <i className="fas fa-upload" />
+                                 </span>
+                                 <span className="file-label">
+                                    Choose a file…
+                                 </span>
                               </span>
-                              <span className="file-label">Choose a file…</span>
-                           </span>
-                           <span className="file-name">{name}</span>
-                        </label>
-                        <button
-                           className={`button is-info ${
-                              this.state.loadingUpload
-                           }`}
-                           style={{ marginLeft: '1rem' }}
-                           onClick={this.uploadImage}>
-                           Upload
-                        </button>
+                              <span className="file-name">{name}</span>
+                           </label>
+                           <button
+                              className={`button is-info ${
+                                 this.state.loadingUpload
+                              }`}
+                              style={{ marginLeft: '1rem' }}
+                              onClick={this.uploadImage}>
+                              Upload
+                           </button>
+                        </div>
                      </div>
+                  </form>
+                  <div className="columns is-multiline">
+                     {/* images list */}
+                     {this.imagesList(this.state.images)}
+                     {/* --- */}
                   </div>
-               </form>
-               <div className="columns is-multiline">
-                  {/* images list */}
-                  {this.imagesList(this.state.images)}
-                  {/* --- */}
                </div>
+               {/* --- */}
             </div>
-            {/* --- */}
          </div>
       )
    }

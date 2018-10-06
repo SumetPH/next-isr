@@ -10,9 +10,10 @@ router.get('/api/instructor/all', (req, res) => {
 
 // post
 router.post('/api/instructor/post', (req, res) => {
-   const { name, position, email, facebook } = req.body
+   const { name, sex, position, email, facebook } = req.body
    const newInstructor = new Instructor({
       name,
+      sex,
       position,
       email,
       facebook

@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import App, { Container } from 'next/app'
 import withRedux from 'next-redux-wrapper'
-import { initStore, loginAdmin, loginUser } from '../redux/store'
+import { initStore, checkAdmin } from '../redux/store'
 import { ToastContainer } from 'react-toastify'
 import withNProgress from 'next-nprogress'
 import NProgressStyles from 'next-nprogress/styles'
@@ -18,12 +18,8 @@ export default withRedux(initStore)(
       }
 
       componentDidMount = () => {
-         if (localStorage.getItem('isAuth')) {
-            this.props.store.dispatch(loginAdmin())
-         }
-         if (localStorage.getItem('isUser')) {
-            const username = localStorage.getItem('username')
-            this.props.store.dispatch(loginUser({ username: username }))
+         if (localStorage.getItem('isAdmin')) {
+            this.props.store.dispatch(checkAdmin('login'))
          }
       }
 

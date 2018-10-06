@@ -22,7 +22,7 @@ router.get('/api/image360/all', (req, res) => {
 // upload image
 router.post('/api/image360/upload', (req, res) => {
    const { filename, img } = req.body
-   if (img === '') return res.json('error')
+   if (filename === '' || img === '') return res.json({ msg: 'Error' })
    const index = img.base64.indexOf(',') + 1
    const base64 = img.base64.substr(index)
    imgur.uploadBase64(base64).then(json => {
