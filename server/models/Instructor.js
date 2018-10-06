@@ -2,14 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const InstructorSchema = new Schema({
-   firstname: {
+   name: {
       type: String,
       required: true
    },
-   lastname: {
-      type: String,
-      required: true
-   }
+   position: String,
+   email: String,
+   facebook: String
 })
 
 module.exports = mongoose.model('instructor', InstructorSchema)

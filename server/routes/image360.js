@@ -1,83 +1,66 @@
 const router = require('express').Router()
 const Image360 = require('../models/Image360')
-const fs = require('fs')
+const imgur = require('imgur')
+imgur.setCredentials('mernstack.isr@gmail.com', 'isr605222', 'b103b8577a84886')
 
-// get all image360
+// get all images
 router.get('/api/image360/all', (req, res) => {
-   Image360.find().exec((err, image360s) => {
+   Image360.find().exec((err, images) => {
       if (err) {
          return res.json({
             msg: 'Error',
-            res: err
+            err: err
          })
       }
       res.json({
          msg: 'Success',
-         res: image360s
+         res: images
       })
    })
 })
 
-// create or update image360
-router.post('/api/image360/create', (req, res) => {
-   const { branch } = req.body
+// upload image
+router.post('/api/image360/upload', (req, res) => {
+   const { filename, img } = req.body
+   if (img === '') return res.json('error')
+   const index = img.base64.indexOf(',') + 1
+   const base64 = img.base64.substr(index)
+   imgur.uploadBase64(base64).then(json => {
+      console.log(json.data)
+      const newImage360 = new Image360({
+         filename: filename,
+         deletehash: json.data.deletehash,
+         src: json.data.link
+      })
 
-   if (!req.files) {
-      return res.json({ msg: 'File not found.' })
-   }
-
-   Image360.findOne({ branch }).exec((err, img) => {
-      // file from client
-      const { file } = req.files
-      const path = `static/360/${branch + file.name}`
-      if (!img) {
-         // create
-         file.mv(path, err => {
-            if (err) {
-               return res.json({ mas: 'Can not upload image360.' })
-            }
-
-            const newImage360 = new Image360({
-               branch,
-               filename: branch + file.name,
-               path: path
-            })
-
-            newImage360.save((err, newImg) => {
-               if (err) {
-                  return res.json('Can not save image360.')
-               }
-               res.json({
-                  msg: 'Saved',
-                  res: newImg
-               })
-            })
-         })
-      } else {
-         // update
-         try {
-            fs.unlinkSync(img.path)
-         } catch (err) {
-            console.log('Not found file.')
+      newImage360.save(err => {
+         if (err) {
+            return res.json({ msg: 'Upload file to Database error.' })
          }
-         file.mv(path, err => {
-            if (err) {
-               return res.json({ mas: 'Can not update image360.' })
-            }
+         res.json({ msg: 'Upload success.' })
+      })
+   })
+})
 
-            img.update({
-               $set: { filename: branch + file.name, path: path }
-            }).exec((err, newImg) => {
-               if (err) {
-                  return res.json('Error')
-               }
-               res.json({
-                  msg: 'Updated',
-                  res: newImg
-               })
-            })
-         })
+// delete image
+router.delete('/api/image360/delete/:id', (req, res) => {
+   const { id } = req.params
+   Image360.findById(id).exec((err, image) => {
+      if (err) {
+         return res.json({ msg: 'Not found image.' })
       }
+      imgur.deleteImage(image.deletehash).then(status => {
+         console.log(status)
+         if (!status.success) {
+            return res.json({ msg: 'Error' })
+         }
+         image.remove(err => {
+            if (err) {
+               return res.json({ msg: 'Error' })
+            }
+            res.json({ msg: 'Deleted' })
+         })
+      })
    })
 })
 

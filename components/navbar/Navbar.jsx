@@ -73,7 +73,7 @@ export class Navbar extends Component {
                            'navbar-item': true,
                            'animated flash': animate
                         })}>
-                        โปรแกรมวิชา
+                        ข้อมูลโปรแกรมวิชา
                      </a>
                   </Link>
                   {/* <Link route="/questions">

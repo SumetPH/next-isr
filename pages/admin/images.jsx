@@ -27,6 +27,7 @@ class AdminImages extends Component {
 
    loadImages = () => {
       axios.get('/api/image/all').then(res => {
+         console.log(res.data)
          this.setState({
             images: res.data.res
          })
@@ -69,7 +70,7 @@ class AdminImages extends Component {
             <Zoom key={i}>
                <div className="column is-4">
                   <div className="box">
-                     <img src={`${item.path}`} alt="" />
+                     <img src={`${item.src}`} alt="" />
                      <br />
                      <button
                         onClick={() => this.deteteImage(item._id)}
@@ -81,25 +82,6 @@ class AdminImages extends Component {
                   </div>
                </div>
             </Zoom>
-         )
-      })
-   }
-
-   imagesTable = images => {
-      return images.map(item => {
-         return (
-            <tr key={item._id}>
-               <td>{item.filename}</td>
-               <td>
-                  <button
-                     onClick={() => this.deteteImage(item._id)}
-                     className={`button is-warning is-small ${
-                        this.state.loadingDel[item._id]
-                     }`}>
-                     Del.
-                  </button>
-               </td>
-            </tr>
          )
       })
    }
@@ -159,26 +141,6 @@ class AdminImages extends Component {
                </div>
             </div>
             {/* --- */}
-
-            {/* Images Admin. */}
-            <div className="column">
-               <h5 className="subtitle is-5">Images Table</h5>
-               <div className="box">
-                  <table className="table is-fullwidth">
-                     <thead>
-                        <tr>
-                           <th>Images</th>
-                           <th>Action</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {/* images row */}
-                        {this.imagesTable(this.state.images)}
-                        {/* --- */}
-                     </tbody>
-                  </table>
-               </div>
-            </div>
          </div>
       )
    }

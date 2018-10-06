@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const fs = require('fs')
 const Image = require('../models/Image')
 const imgur = require('imgur')
 imgur.setCredentials('mernstack.isr@gmail.com', 'isr605222', 'b103b8577a84886')
@@ -31,7 +30,7 @@ router.post('/api/image/upload', (req, res) => {
       const newImage = new Image({
          filename: img.name,
          deletehash: json.data.deletehash,
-         path: json.data.link
+         src: json.data.link
       })
 
       newImage.save(err => {

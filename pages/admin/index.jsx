@@ -58,18 +58,8 @@ class Admin extends Component {
                         <div className="box ">
                            <b>Admin</b>
                            <hr />
-                           {/* <p style={{ margin: '1rem' }}>
-                              <Link route="/admin/questions">
-                                 <a>
-                                    <span className="icon m-5px">
-                                       <i className="fas fa-question" />
-                                    </span>
-                                    ลบกระทู้คำถาม
-                                 </a>
-                              </Link>
-                           </p> */}
                            <p style={{ margin: '1rem' }}>
-                              <Link route="/admin/instructor">
+                              <Link route="/admin/lesson">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-chalkboard-teacher" />
@@ -101,25 +91,15 @@ class Admin extends Component {
                            </p>
 
                            <p style={{ margin: '1rem' }}>
-                              <Link route="/admin/images">
+                              <Link route="/admin/image360">
                                  <a>
                                     <span className="icon m-5px">
                                        <i className="fas fa-images" />
                                     </span>
-                                    เพิ่ม / ลบ 360
+                                    เพิ่ม / ลบ 360 องศา
                                  </a>
                               </Link>
                            </p>
-                           {/* <p style={{ margin: '1rem' }}>
-                              <Link route="/admin/user">
-                                 <a>
-                                    <span className="icon m-5px">
-                                       <i className="fas fa-images" />
-                                    </span>
-                                    ลบสมาชิก
-                                 </a>
-                              </Link>
-                           </p> */}
                            <p style={{ margin: '1rem' }}>
                               <Link route="/admin/setting">
                                  <a>

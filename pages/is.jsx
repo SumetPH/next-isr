@@ -40,11 +40,8 @@ class Is extends Component {
                            </h3>
                         </div>
                         <I360 />
-                        <hr />
                         <Lesson />
-                        <hr />
                         <Instructor />
-                        <hr />
                         <Image />
                      </div>
                   </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import classnames from 'classnames'
+import Fade from 'react-reveal/Fade'
 
 // redux
 import { connect } from 'react-redux'
@@ -25,7 +26,7 @@ export class Instructor extends Component {
    loadInstructor = () => {
       axios.get('/api/instructor/all').then(res => {
          console.log(res.data)
-         this.setState({ instructors: res.data.res })
+         this.setState({ instructors: res.data.instructors })
       })
       setTimeout(() => {
          this.setState({ loadPage: true })
@@ -39,8 +40,10 @@ export class Instructor extends Component {
          method: 'POST',
          url: '/api/instructor/post',
          data: {
-            firstname: this.refs.firstname.value,
-            lastname: this.refs.lastname.value
+            name: this.refs.name.value,
+            position: this.refs.position.value,
+            email: this.refs.email.value,
+            facebook: this.refs.facebook.value
          }
       }).then(res => {
          console.log(res.data)
@@ -60,37 +63,43 @@ export class Instructor extends Component {
       axios({
          method: 'DELETE',
          url: '/api/instructor/delete',
-         data: {
-            _id
-         }
+         data: { _id }
       }).then(res => {
+         console.log(res.data)
          this.loadInstructor()
       })
    }
 
-   // view
-   instructorList = instructors => {
-      return instructors.map(instructor => {
+   render() {
+      const { instructors } = this.state
+      const listInstructor = instructors.map(instructor => {
          return (
             <tr key={instructor._id}>
-               <td>
-                  {instructor.firstname} {instructor.lastname}
-               </td>
-               <td>
-                  <button
-                     className={`button is-danger is-small ${
-                        this.state.loadingDel[instructor._id]
-                     }`}
-                     onClick={() => this.deleteInstructor(instructor._id)}>
-                     ลบ
-                  </button>
-               </td>
+               <Fade>
+                  <td>{instructor.name}</td>
+               </Fade>
+               <Fade>
+                  <td>{instructor.position}</td>
+               </Fade>
+               <Fade>
+                  <td>{instructor.email}</td>
+               </Fade>
+               <Fade>
+                  <td>{instructor.facebook}</td>
+               </Fade>
+               <Fade>
+                  <td>
+                     <button
+                        className="button is-danger is-small"
+                        onClick={() => this.deleteInstructor(instructor._id)}>
+                        ลบ
+                     </button>
+                  </td>
+               </Fade>
             </tr>
          )
       })
-   }
 
-   render() {
       if (!this.state.loadPage) {
          return <Loading />
       }
@@ -101,45 +110,48 @@ export class Instructor extends Component {
 
       return (
          <div className="container">
-            <div className="column" style={{ marginTop: '1rem' }}>
-               <h5 className="title is-5">เพิ่ม / ลบ อาจารย์</h5>
-               <div className="box">
-                  <table className="table is-striped is-fullwidth">
-                     <thead>
-                        <tr>
-                           <th>Instructor</th>
-                           <th>Action</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {this.instructorList(this.state.instructors)}
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-
             {/* add professor */}
             <div className="column">
-               <h6 className="subtitle is-6">เพิ่มอาจารย์</h6>
-               <form ref="form">
-                  <div className="columns">
+               <div className="box">
+                  <h6 className="subtitle is-6">เพิ่มอาจารย์</h6>
+                  <form ref="form">
                      <div className="column">
                         <div className="control">
                            <input
-                              className="input"
+                              className="input is-rounded"
                               type="text"
-                              ref="firstname"
-                              placeholder="ชื่อ"
+                              ref="name"
+                              placeholder="ชื่อ-สกุล"
                            />
                         </div>
                      </div>
                      <div className="column">
                         <div className="control">
                            <input
-                              className="input"
+                              className="input is-rounded"
                               type="text"
-                              ref="lastname"
-                              placeholder="นามสกุล"
+                              ref="position"
+                              placeholder="ตำแหน่ง"
+                           />
+                        </div>
+                     </div>
+                     <div className="column">
+                        <div className="control">
+                           <input
+                              className="input is-rounded"
+                              type="text"
+                              ref="email"
+                              placeholder="Email"
+                           />
+                        </div>
+                     </div>
+                     <div className="column">
+                        <div className="control">
+                           <input
+                              className="input is-rounded"
+                              type="text"
+                              ref="facebook"
+                              placeholder="Facebook"
                            />
                         </div>
                      </div>
@@ -153,10 +165,25 @@ export class Instructor extends Component {
                            เพิ่ม
                         </button>
                      </div>
-                  </div>
-               </form>
+                  </form>
+               </div>
             </div>
             {/* --- */}
+
+            <div className="column">
+               <table className="table is-striped is-fullwidth">
+                  <thead>
+                     <tr>
+                        <th>ชื่อ-สกุล</th>
+                        <th>ตำแหน่ง</th>
+                        <th>Email</th>
+                        <th>Facebook</th>
+                        <th>ลบ</th>
+                     </tr>
+                  </thead>
+                  <tbody>{listInstructor}</tbody>
+               </table>
+            </div>
          </div>
       )
    }

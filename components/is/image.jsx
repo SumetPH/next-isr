@@ -15,17 +15,23 @@ export class Image extends Component {
    }
 
    render() {
-      const imgList = this.state.images.map(item => {
+      const { images } = this.state
+      const imgList = images.map(item => {
          return (
             <div key={item._id} className="column is-4">
                <Fade>
                   <div className="box">
-                     <img src={item.path} alt="" />
+                     <img src={item.src} alt="" />
                   </div>
                </Fade>
             </div>
          )
       })
+
+      if (images.length === 0) {
+         return null
+      }
+
       return (
          <div className="column ">
             <div

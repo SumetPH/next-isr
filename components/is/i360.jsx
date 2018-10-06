@@ -1,18 +1,52 @@
 import React, { Component } from 'react'
 import Iframe from 'react-iframe'
 import Fade from 'react-reveal/Fade'
+import Axios from 'axios'
 
 export class i360 extends Component {
    state = {
-      img: [
-         {
-            name: 'ห้องเรียน',
-            file: 'AAoETw1.jpg'
-         }
-      ],
-      pano: 'AAoETw1.jpg'
+      image360: [],
+      pano: ''
    }
+
+   componentDidMount = () => {
+      this.loadImage360()
+   }
+
+   loadImage360 = () => {
+      Axios.get('/api/image360/all').then(res => {
+         console.log(res.data)
+         try {
+            const { src } = res.data.res[0]
+            const srcIndex = src.lastIndexOf('/') + 1
+            const pano = src.substr(srcIndex)
+            this.setState({ image360: res.data.res, pano: pano })
+         } catch (err) {
+            console.log(err)
+         }
+      })
+   }
+
    render() {
+      if (this.state.image360.length === 0) {
+         return null
+      }
+
+      const listImage360 = this.state.image360.map((item, i) => {
+         const { src } = item
+         const srcIndex = src.lastIndexOf('/') + 1
+         const pano = src.substr(srcIndex)
+         return (
+            <button
+               key={i}
+               className="button is-primary is-small is-rounded"
+               style={{ margin: '0.5rem' }}
+               onClick={() => this.setState({ pano })}>
+               {item.filename}
+            </button>
+         )
+      })
+
       return (
          <div>
             <div className="columns">
@@ -40,32 +74,13 @@ export class i360 extends Component {
                            alignItems: 'center'
                         }}>
                         <b>{'<<'}</b>
-                        {this.state.img.map((item, i) => {
-                           return (
-                              <button
-                                 key={i}
-                                 className="button is-primary is-small is-rounded"
-                                 style={{ margin: '0.5rem' }}
-                                 onClick={() =>
-                                    this.setState({ pano: item.file })
-                                 }>
-                                 {item.name}
-                              </button>
-                           )
-                        })}
+                        {listImage360}
                         <b>{'>>'}</b>
                      </div>
                   </div>
                </div>
-               {/* <div className="animated fadeInUp slow delay-1s">
-                  <p style={{ padding: '2rem 1rem' }}>
-                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Veniam dolores sunt molestias, dolor, similique non esse ex
-                     eligendi at odit optio sed, sit assumenda dolorem placeat
-                     ipsam cum. Molestias, voluptatem?
-                  </p>
-               </div> */}
             </div>
+            <hr />
          </div>
       )
    }

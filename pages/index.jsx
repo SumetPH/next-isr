@@ -30,10 +30,12 @@ class Index extends Component {
                         'container has-text-centered': true,
                         'animated pulse': this.state.animate
                      })}>
-                     <p className="title is-3">เว็บไซต์ประชาสัมพันธ์</p>
-                     <p className="title is-4">
-                        โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
+                     <p className="title is-3">
+                        การพัฒนาเว็บไซต์ โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์
                         <br />
+                        พัฒนาซอฟต์แวร์
+                     </p>
+                     <p className="title is-4">
                         ด้วยเทคนิคสมัยใหม่ (Mern Stack)
                      </p>
                      <p className="subtitle is-5 animated zoomIn delay-1s">
