@@ -8,12 +8,11 @@ export class lesson extends Component {
    }
 
    componentDidMount = () => {
-      this.loadLesson()
+      this.loadLessson()
    }
 
-   loadLesson = () => {
+   loadLessson = () => {
       Axios.get('/api/lesson/all').then(res => {
-         console.log(res.data)
          this.setState({ lessons: res.data.lesson })
       })
    }

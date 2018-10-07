@@ -8,8 +8,11 @@ export class Image extends Component {
    }
 
    componentDidMount = () => {
+      this.loadImage()
+   }
+
+   loadImage = () => {
       Axios.get('/api/image/all').then(res => {
-         console.log(res.data)
          this.setState({ images: res.data.res })
       })
    }

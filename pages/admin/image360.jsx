@@ -91,7 +91,7 @@ class Image360 extends Component {
             <Zoom key={image._id}>
                <div className="column is-4">
                   <div className="box">
-                     <img src={`${image.src}`} alt="" />
+                     <img src={`https://i.imgur.com/${image.src}`} alt="" />
                      <br />
                      {image.filename}
                      <br />

@@ -10,9 +10,6 @@ export class lesson extends Component {
    state = {
       lessons: [],
       _id: '',
-      numberEdit: '',
-      titleEdit: '',
-      valueEdit: '',
       activeModal: false
    }
 
@@ -43,20 +40,24 @@ export class lesson extends Component {
       })
    }
 
-   updateLesson = () => {
+   updateLesson = e => {
+      e.preventDefault()
       Axios({
          url: '/api/lesson/update',
          method: 'put',
          data: {
             _id: this.state._id,
-            number: this.state.numberEdit,
-            title: this.state.titleEdit,
-            value: this.state.valueEdit
+            number: this.refs.numberEdit.value,
+            title: this.refs.titleEdit.value,
+            value: this.refs.valueEdit.value
          }
       }).then(res => {
          console.log(res.data)
-         if (res.data.msg === 'Success') this.setState({ activeModal: false })
-         this.loadLesson()
+         if (res.data.msg === 'Success') {
+            this.setState({ activeModal: false })
+            this.refs.formEdit.reset()
+            this.loadLesson()
+         }
       })
    }
 
@@ -72,13 +73,7 @@ export class lesson extends Component {
    }
 
    render() {
-      const {
-         lessons,
-         numberEdit,
-         titleEdit,
-         valueEdit,
-         activeModal
-      } = this.state
+      const { lessons, activeModal } = this.state
 
       const listLesson = lessons.map(lesson => {
          return (
@@ -96,15 +91,15 @@ export class lesson extends Component {
                   <td>
                      <button
                         className="button is-warning is-small"
-                        onClick={() =>
+                        onClick={() => {
+                           this.refs.numberEdit.value = lesson.number
+                           this.refs.titleEdit.value = lesson.title
+                           this.refs.valueEdit.value = lesson.value
                            this.setState({
                               _id: lesson._id,
-                              numberEdit: lesson.number,
-                              titleEdit: lesson.title,
-                              valueEdit: lesson.value,
                               activeModal: true
                            })
-                        }>
+                        }}>
                         แก้ไข
                      </button>
                   </td>
@@ -193,19 +188,14 @@ export class lesson extends Component {
                            onClick={() => this.setState({ activeModal: false })}
                         />
                      </header>
-                     <section className="modal-card-body">
-                        <form ref="formEdit">
+                     <form ref="formEdit">
+                        <section className="modal-card-body">
                            <div className="column">
                               <label>รหัสวิชา</label>
                               <input
                                  className="input is-rounded"
                                  type="text"
-                                 defaultValue={numberEdit}
-                                 onChange={input =>
-                                    this.setState({
-                                       numberEdit: input.target.value
-                                    })
-                                 }
+                                 ref="numberEdit"
                               />
                            </div>
                            <div className="column">
@@ -213,12 +203,7 @@ export class lesson extends Component {
                               <input
                                  className="input is-rounded"
                                  type="text"
-                                 defaultValue={titleEdit}
-                                 onChange={input =>
-                                    this.setState({
-                                       titleEdit: input.target.value
-                                    })
-                                 }
+                                 ref="titleEdit"
                               />
                            </div>
                            <div className="column">
@@ -226,30 +211,26 @@ export class lesson extends Component {
                               <input
                                  className="input is-rounded"
                                  type="text"
-                                 defaultValue={valueEdit}
-                                 onChange={input =>
-                                    this.setState({
-                                       valueEdit: input.target.value
-                                    })
-                                 }
+                                 ref="valueEdit"
                               />
                            </div>
-                        </form>
-                     </section>
-                     <footer className="modal-card-foot">
-                        <button
-                           className="button is-success"
-                           onClick={this.updateLesson}>
-                           บันทึก
-                        </button>
-                        <button
-                           className="button"
-                           onClick={() =>
-                              this.setState({ activeModal: false })
-                           }>
-                           ยกเลิก
-                        </button>
-                     </footer>
+                        </section>
+                        <footer className="modal-card-foot">
+                           <button
+                              className="button is-success"
+                              onClick={this.updateLesson}>
+                              บันทึก
+                           </button>
+                           <button
+                              className="button"
+                              onClick={e => {
+                                 e.preventDefault()
+                                 this.setState({ activeModal: false })
+                              }}>
+                              ยกเลิก
+                           </button>
+                        </footer>
+                     </form>
                   </div>
                </div>
                {/* --- */}

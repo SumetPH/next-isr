@@ -27,10 +27,13 @@ router.post('/api/image360/upload', (req, res) => {
    const base64 = img.base64.substr(index)
    imgur.uploadBase64(base64).then(json => {
       console.log(json.data)
+      const { deletehash, link } = json.data
+      const srcIndex = link.lastIndexOf('/') + 1
+      const src = link.substr(srcIndex)
       const newImage360 = new Image360({
          filename: filename,
-         deletehash: json.data.deletehash,
-         src: json.data.link
+         deletehash,
+         src
       })
 
       newImage360.save(err => {

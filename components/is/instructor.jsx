@@ -13,7 +13,6 @@ export class instructor extends Component {
 
    loadInstructor = () => {
       Axios.get('/api/instructor/all').then(res => {
-         console.log(res.data)
          this.setState({ instructors: res.data.instructors })
       })
    }

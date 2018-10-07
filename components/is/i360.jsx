@@ -14,17 +14,13 @@ export class i360 extends Component {
    }
 
    loadImage360 = () => {
-      Axios.get('/api/image360/all').then(res => {
-         console.log(res.data)
-         try {
-            const { src } = res.data.res[0]
-            const srcIndex = src.lastIndexOf('/') + 1
-            const pano = src.substr(srcIndex)
-            this.setState({ image360: res.data.res, pano: pano })
-         } catch (err) {
-            console.log(err)
-         }
-      })
+      try {
+         Axios.get('/api/image360/all').then(res => {
+            this.setState({ image360: res.data.res, pano: res.data.res[0].src })
+         })
+      } catch (err) {
+         console.log(err)
+      }
    }
 
    render() {
@@ -32,17 +28,14 @@ export class i360 extends Component {
          return null
       }
 
-      const listImage360 = this.state.image360.map((item, i) => {
-         const { src } = item
-         const srcIndex = src.lastIndexOf('/') + 1
-         const pano = src.substr(srcIndex)
+      const listImage360 = this.state.image360.map(image => {
          return (
             <button
-               key={i}
+               key={image._id}
                className="button is-primary is-small is-rounded"
                style={{ margin: '0.5rem' }}
-               onClick={() => this.setState({ pano })}>
-               {item.filename}
+               onClick={() => this.setState({ pano: image.src })}>
+               {image.filename}
             </button>
          )
       })
