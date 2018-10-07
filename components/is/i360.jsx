@@ -5,23 +5,23 @@ import Axios from 'axios'
 
 export class i360 extends Component {
    state = {
-      image360: [],
-      pano: ''
+      image360: this.props.image360,
+      pano: this.props.pano
    }
 
-   componentDidMount = () => {
-      this.loadImage360()
-   }
+   // componentDidMount = () => {
+   //    this.loadImage360()
+   // }
 
-   loadImage360 = () => {
-      try {
-         Axios.get('/api/image360/all').then(res => {
-            this.setState({ image360: res.data.res, pano: res.data.res[0].src })
-         })
-      } catch (err) {
-         console.log(err)
-      }
-   }
+   // loadImage360 = () => {
+   //    try {
+   //       Axios.get('/api/image360/all').then(res => {
+   //          this.setState({ image360: res.data.res, pano: res.data.res[0].src })
+   //       })
+   //    } catch (err) {
+   //       console.log(err)
+   //    }
+   // }
 
    render() {
       if (this.state.image360.length === 0) {

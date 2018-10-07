@@ -3,22 +3,22 @@ import Fade from 'react-reveal/Fade'
 import Axios from 'axios'
 
 export class lesson extends Component {
-   state = {
-      lessons: []
-   }
+   // state = {
+   //    lessons: []
+   // }
 
-   componentDidMount = () => {
-      this.loadLessson()
-   }
+   // componentDidMount = () => {
+   //    this.loadLessson()
+   // }
 
-   loadLessson = () => {
-      Axios.get('/api/lesson/all').then(res => {
-         this.setState({ lessons: res.data.lesson })
-      })
-   }
+   // loadLessson = () => {
+   //    Axios.get('/api/lesson/all').then(res => {
+   //       this.setState({ lessons: res.data.lesson })
+   //    })
+   // }
 
    render() {
-      const { lessons } = this.state
+      const { lessons } = this.props
       const listLesson = lessons.map(lesson => {
          return (
             <tr key={lesson._id}>

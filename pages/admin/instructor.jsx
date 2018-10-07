@@ -45,7 +45,7 @@ export class Instructor extends Component {
             sex: this.refs.sex.value,
             position: this.refs.position.value,
             email: this.refs.email.value,
-            facebook: this.refs.facebook.value
+            phone: this.refs.phone.value
          }
       }).then(res => {
          console.log(res.data)
@@ -90,7 +90,7 @@ export class Instructor extends Component {
                   <td>{instructor.email}</td>
                </Fade>
                <Fade>
-                  <td>{instructor.facebook}</td>
+                  <td>{instructor.phone}</td>
                </Fade>
                <Fade>
                   <td>
@@ -172,8 +172,8 @@ export class Instructor extends Component {
                               <input
                                  className="input is-rounded"
                                  type="text"
-                                 ref="facebook"
-                                 placeholder="Facebook"
+                                 ref="phone"
+                                 placeholder="หมายเลขโทรศัพท์"
                               />
                            </div>
                         </div>
@@ -200,7 +200,7 @@ export class Instructor extends Component {
                            <th>ชื่อ-สกุล</th>
                            <th>ตำแหน่ง</th>
                            <th>Email</th>
-                           <th>Facebook</th>
+                           <th>หมายเลขโทรศัพท์</th>
                            <th>ลบ</th>
                         </tr>
                      </thead>

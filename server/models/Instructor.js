@@ -9,7 +9,7 @@ const InstructorSchema = new Schema({
    sex: String,
    position: String,
    email: String,
-   facebook: String
+   phone: String
 })
 
 module.exports = mongoose.model('instructor', InstructorSchema)

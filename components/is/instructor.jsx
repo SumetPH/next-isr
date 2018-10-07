@@ -3,22 +3,22 @@ import Fade from 'react-reveal/Fade'
 import Axios from 'axios'
 
 export class instructor extends Component {
-   state = {
-      instructors: []
-   }
+   // state = {
+   //    instructors: []
+   // }
 
-   componentDidMount = () => {
-      this.loadInstructor()
-   }
+   // componentDidMount = () => {
+   //    this.loadInstructor()
+   // }
 
-   loadInstructor = () => {
-      Axios.get('/api/instructor/all').then(res => {
-         this.setState({ instructors: res.data.instructors })
-      })
-   }
+   // loadInstructor = () => {
+   //    Axios.get('/api/instructor/all').then(res => {
+   //       this.setState({ instructors: res.data.instructors })
+   //    })
+   // }
 
    render() {
-      const { instructors } = this.state
+      const { instructors } = this.props
       const listInstructor = instructors.map(instructor => {
          return (
             <div
@@ -53,7 +53,7 @@ export class instructor extends Component {
                            <span className="icon">
                               <i className="fab fa-facebook" />
                            </span>
-                           : {instructor.facebook}
+                           : {instructor.phone}
                         </p>
                      </div>
                   </div>

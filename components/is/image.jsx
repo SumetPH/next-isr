@@ -3,22 +3,22 @@ import Fade from 'react-reveal/Fade'
 import Axios from 'axios'
 
 export class Image extends Component {
-   state = {
-      images: []
-   }
+   // state = {
+   //    images: []
+   // }
 
-   componentDidMount = () => {
-      this.loadImage()
-   }
+   // componentDidMount = () => {
+   //    this.loadImage()
+   // }
 
-   loadImage = () => {
-      Axios.get('/api/image/all').then(res => {
-         this.setState({ images: res.data.res })
-      })
-   }
+   // loadImage = () => {
+   //    Axios.get('/api/image/all').then(res => {
+   //       this.setState({ images: res.data.res })
+   //    })
+   // }
 
    render() {
-      const { images } = this.state
+      const { images } = this.props
       const imgList = images.map(item => {
          return (
             <div key={item._id} className="column is-4">

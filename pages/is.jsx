@@ -11,17 +11,50 @@ import Image from '../components/is/image'
 class Is extends Component {
    // state
    state = {
-      loadPage: false
+      loadPage: false,
+      image360: [],
+      pano: '',
+      images: [],
+      instructors: [],
+      lessons: []
    }
 
    // method
    componentDidMount = () => {
+      this.loadData()
       setTimeout(() => {
          this.setState({ loadPage: true })
       }, 1000)
    }
 
+   loadData = () => {
+      try {
+         Axios.get('/api/image360/all').then(res => {
+            this.setState({ image360: res.data.res, pano: res.data.res[0].src })
+         })
+         Axios.get('/api/image/all').then(res => {
+            this.setState({ images: res.data.res })
+         })
+         Axios.get('/api/instructor/all').then(res => {
+            this.setState({ instructors: res.data.instructors })
+         })
+         Axios.get('/api/lesson/all').then(res => {
+            this.setState({ lessons: res.data.lesson })
+         })
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
    render() {
+      const {
+         loadPage,
+         image360,
+         pano,
+         images,
+         instructors,
+         lessons
+      } = this.state
       return (
          <div>
             {/* <NavbarSide /> */}
@@ -39,12 +72,12 @@ class Is extends Component {
                            ระบบสาระสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
                         </h3>
                      </div>
-                     {this.state.loadPage ? (
+                     {loadPage ? (
                         <div>
-                           <I360 />
-                           <Lesson />
-                           <Instructor />
-                           <Image />
+                           <I360 image360={image360} pano={pano} />
+                           <Lesson lessons={lessons} />
+                           <Instructor instructors={instructors} />
+                           <Image images={images} />
                         </div>
                      ) : (
                         <Loading bg="#363636" color="white" />
