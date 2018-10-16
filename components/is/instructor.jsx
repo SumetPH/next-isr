@@ -51,7 +51,7 @@ export class instructor extends Component {
                         </p>
                         <p>
                            <span className="icon">
-                              <i className="fab fa-facebook" />
+                              <i className="fas fa-phone" />
                            </span>
                            : {instructor.phone}
                         </p>
