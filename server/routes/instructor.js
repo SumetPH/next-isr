@@ -28,6 +28,21 @@ router.post('/api/instructor/post', (req, res) => {
    })
 })
 
+// update lesson
+router.put('/api/instructor/update', (req, res) => {
+   const { _id, name, sex, position, email, phone } = req.body
+   Instructor.findByIdAndUpdate(_id, {
+      name,
+      sex,
+      position,
+      email,
+      phone
+   }).exec((err, result) => {
+      if (err) return res.json({ msg: 'Error', err })
+      res.json({ msg: 'Success', result })
+   })
+})
+
 // delete
 router.delete('/api/instructor/delete', (req, res) => {
    const { _id } = req.body
