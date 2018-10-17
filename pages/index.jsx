@@ -48,11 +48,11 @@ class Index extends Component {
                   </div>
                </div>
                <div className="hero-foot">
-                  <h3
+                  <h5
                      className="animated fadeInLeft delay-1s slow"
                      style={{ margin: '1rem' }}>
                      Power by ISr4B
-                  </h3>
+                  </h5>
                </div>
             </div>
             {/* preload */}
