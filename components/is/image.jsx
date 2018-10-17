@@ -1,32 +1,29 @@
 import React, { Component } from 'react'
-import Fade from 'react-reveal/Fade'
-import Axios from 'axios'
+import Zoom from 'react-reveal/Zoom'
+import classnames from 'classnames'
 
 export class Image extends Component {
-   // state = {
-   //    images: []
-   // }
-
-   // componentDidMount = () => {
-   //    this.loadImage()
-   // }
-
-   // loadImage = () => {
-   //    Axios.get('/api/image/all').then(res => {
-   //       this.setState({ images: res.data.res })
-   //    })
-   // }
+   state = {
+      isActive: false,
+      img: ''
+   }
 
    render() {
       const { images } = this.props
       const imgList = images.map(item => {
          return (
             <div key={item._id} className="column is-4">
-               <Fade>
+               <Zoom>
                   <div className="box">
-                     <img src={item.src} alt="" />
+                     <img
+                        onClick={() =>
+                           this.setState({ isActive: true, img: item.src })
+                        }
+                        src={item.src}
+                        alt=""
+                     />
                   </div>
-               </Fade>
+               </Zoom>
             </div>
          )
       })
@@ -47,6 +44,24 @@ export class Image extends Component {
             </div>
             <div className="column">
                <div className="columns is-multiline">{imgList}</div>
+            </div>
+            {/* modal */}
+            <div
+               className={classnames({
+                  modal: true,
+                  'is-active': this.state.isActive
+               })}>
+               <div className="modal-background" />
+               <div className="modal-content">
+                  <p className="image is-4by3">
+                     <img src={this.state.img} alt="" />>
+                  </p>
+               </div>
+               <button
+                  className="modal-close is-large"
+                  aria-label="close"
+                  onClick={() => this.setState({ isActive: false })}
+               />
             </div>
          </div>
       )

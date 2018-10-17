@@ -69,7 +69,7 @@ class Is extends Component {
                            Information System
                         </h3>
                         <h3 className="subtitle is-4 has-text-light animated shake delay-5s">
-                           ระบบสาระสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์
+                           ระบบสาระสนเทศทางคอมพิวเตอร์ พัฒนาซอฟต์แวร์ (เทียบโอน)
                         </h3>
                      </div>
                      {loadPage ? (

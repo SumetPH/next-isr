@@ -33,7 +33,7 @@ class Index extends Component {
                      <p className="title is-3">
                         การพัฒนาเว็บไซต์ โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์
                         <br />
-                        พัฒนาซอฟต์แวร์
+                        พัฒนาซอฟต์แวร์ (เทียบโอน)
                      </p>
                      <p className="title is-4">
                         ด้วยเทคนิคสมัยใหม่ (Mern Stack)
