@@ -40,7 +40,10 @@ export class Navbar extends Component {
                   <img src={logo === 'black' ? logoBlack : logoWhite} alt="" />
                </span>
                <span
-                  className="navbar-burger burger"
+                  className={classnames({
+                     'navbar-burger burger': true,
+                     'is-active': this.state.isActive
+                  })}
                   data-target="navbarMenuHeroA"
                   onClick={() =>
                      this.setState({
