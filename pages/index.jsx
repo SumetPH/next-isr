@@ -36,7 +36,7 @@ class Index extends Component {
                         พัฒนาซอฟต์แวร์ (เทียบโอน)
                      </p>
                      <p className="title is-4">
-                        ด้วยเทคนิคสมัยใหม่ (Mern Stack)
+                        ด้วย จาวาสคริป เฟรมเวิร์ค (Javascript Framework)
                      </p>
                      <p className="subtitle is-5 animated zoomIn delay-1s">
                         Information System.
