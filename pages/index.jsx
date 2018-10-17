@@ -1,22 +1,9 @@
 import React, { Component } from 'react'
 import Navbar from '../components/navbar/Navbar'
 import classnames from 'classnames'
+import Typist from 'react-typist'
 
 class Index extends Component {
-   state = {
-      animate: true
-   }
-
-   componentDidMount = () => {
-      this.interval = setInterval(() => {
-         this.setState({ animate: !this.state.animate })
-      }, 2000)
-   }
-
-   componentWillUnmount = () => {
-      clearInterval(this.interval)
-   }
-
    render() {
       return (
          <div>
@@ -25,22 +12,39 @@ class Index extends Component {
                   <Navbar />
                </div>
                <div className="hero-body">
-                  <div
-                     className={classnames({
-                        'container has-text-centered': true,
-                        'animated pulse': this.state.animate
-                     })}>
-                     <p className="title is-3">
-                        การพัฒนาเว็บไซต์ โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์
-                        <br />
-                        พัฒนาซอฟต์แวร์ (เทียบโอน)
-                     </p>
-                     <p className="title is-4">
-                        ด้วย จาวาสคริป เฟรมเวิร์ค (Javascript Framework)
-                     </p>
-                     <p className="subtitle is-5 animated zoomIn delay-1s">
-                        Information System.
-                     </p>
+                  <div className="container has-text-centered">
+                     <div>
+                        <h1>การพัฒนาเว็บไซต์</h1>
+                        <Typist
+                           avgTypingDelay={80}
+                           cursor={{
+                              element: ' _',
+                              hideWhenDone: true
+                           }}
+                           onTypingDone={() =>
+                              this.setState({ animate: true })
+                           }>
+                           <span
+                              style={{ fontSize: '24px', fontWeight: 'bold' }}>
+                              โปรแกรมวิชา ระบบสารสนเทศทางคอมพิวเตอร์
+                           </span>
+
+                           <span
+                              style={{ fontSize: '24px', fontWeight: 'bold' }}>
+                              พัฒนาซอฟต์แวร์ (เทียบโอน)
+                           </span>
+                        </Typist>
+                     </div>
+                     <div
+                        className="animated fadeIn delay-3s"
+                        style={{ marginTop: '1rem' }}>
+                        <h3>
+                           ด้วย จาวาสคริป เฟรมเวิร์ค (Javascript Framework)
+                           <br />
+                           Information System.
+                        </h3>
+                     </div>
+                     <p className="subtitle is-5 animated zoomIn delay-1s" />
                   </div>
                </div>
                <div className="hero-foot">
