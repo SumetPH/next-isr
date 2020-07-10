@@ -10,3 +10,6 @@ Host : Heroku
 
 ## Reference
 https://next-isr.herokuapp.com/
+
+## Example
+<img src="https://i.imgur.com/OqDd0VG.png" />
