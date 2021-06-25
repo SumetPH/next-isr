@@ -1,4 +1,5 @@
 module.exports = {
-   mongodbUrl: 'mongodb://isr:isr605222@ds125932.mlab.com:25932/mernstack',
-   secretOrKey: 'isr'
-}
+  mongodbUrl:
+    "mongodb+srv://root1234:root1234@mydb.blsm7.mongodb.net/mernstack",
+  secretOrKey: "isr",
+};
